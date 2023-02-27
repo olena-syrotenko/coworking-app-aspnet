@@ -1,7 +1,11 @@
+using CoworkingApp.Data.Models;
 using System.Collections.Generic;
 
-public interface IEquipment
+namespace CoworkingApp.Data.Interfaces
 {
-    IEnumerable<Equipment> AllEquipment { get; }
-    Equipment getById(int id);
+    public interface IEquipment
+    {
+        IEnumerable<Equipment> AllEquipment { get; }
+        Equipment getById(int id);
+    }
 }

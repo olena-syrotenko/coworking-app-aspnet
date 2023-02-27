@@ -1,14 +1,18 @@
+using CoworkingApp.Data.Interfaces;
+using CoworkingApp.Data.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-public class MockEquipment : IEquipment
+namespace CoworkingApp.Data.Mocks
 {
-    private IEquipmentType _equipmentType = new MockEquipmentType();
-    public IEnumerable<Equipment> AllEquipment
+    public class MockEquipment : IEquipment
     {
-        get
+        private IEquipmentType _equipmentType = new MockEquipmentType();
+        public IEnumerable<Equipment> AllEquipment
         {
-            return new List<Equipment>
+            get
+            {
+                return new List<Equipment>
             {
                 new Equipment
                 {
@@ -51,11 +55,12 @@ public class MockEquipment : IEquipment
                     equipmentType = _equipmentType.AllEquipmentTypes.Where(type => type.name.Equals("Навушники")).First(),
                 },
             };
+            }
         }
-    }
 
-    public Equipment getById(int id)
-    {
-        throw new System.NotImplementedException();
+        public Equipment getById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

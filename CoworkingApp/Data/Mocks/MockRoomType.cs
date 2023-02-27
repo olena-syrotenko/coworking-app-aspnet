@@ -1,10 +1,16 @@
+using CoworkingApp.Data.Interfaces;
+using CoworkingApp.Data.Models;
 using System.Collections.Generic;
 
-public class MockRoomType : IRoomType
+namespace CoworkingApp.Data.Mocks
 {
-    public IEnumerable<RoomType> AllRoomTypes { get
+    public class MockRoomType : IRoomType
+    {
+        public IEnumerable<RoomType> AllRoomTypes
         {
-            return new List<RoomType>
+            get
+            {
+                return new List<RoomType>
             {
                 new RoomType {name = "Open space", description = "Великий простір із незакріпленими робочими місцями"},
                 new RoomType {name = "Lounge zone", description = "Робочий простір із м'якими диванами та релаксуючою атмосферою"},
@@ -13,6 +19,7 @@ public class MockRoomType : IRoomType
                 new RoomType {name = "Skype room", description = "Приватна кімната на одного для дзвінків"},
                 new RoomType {name = "Bussiness suite", description = "Великий приватний простір для великих команд"},
             };
+            }
         }
     }
 }

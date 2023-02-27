@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 
-public class EquipmentType
+namespace CoworkingApp.Data.Models
 {
-    public int id { get; set; }
-    public string name { get; set; }
-    public double price { get; set; }
-    public List<Equipment> equipment { get; set; }
+    public class EquipmentType
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public double price { get; set; }
+        public List<Equipment> equipment { get; set; }
+    }
 }

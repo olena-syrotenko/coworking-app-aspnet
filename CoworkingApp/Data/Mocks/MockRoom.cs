@@ -1,14 +1,18 @@
+using CoworkingApp.Data.Interfaces;
+using CoworkingApp.Data.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-public class MockRoom : IRoom
+namespace CoworkingApp.Data.Mocks
 {
-    private readonly IRoomType _roomType = new MockRoomType();
-    public IEnumerable<Room> AllRooms
+    public class MockRoom : IRoom
     {
-        get
+        private readonly IRoomType _roomType = new MockRoomType();
+        public IEnumerable<Room> AllRooms
         {
-            return new List<Room>
+            get
+            {
+                return new List<Room>
             {
                 new Room
                 {
@@ -41,7 +45,7 @@ public class MockRoom : IRoom
                     name = "Tokyo",
                     area = 100,
                     maxPlaces = 20,
-                    roomType = _roomType.AllRoomTypes.Where(type => type.name.Equals("Bussiness suite")).First(), 
+                    roomType = _roomType.AllRoomTypes.Where(type => type.name.Equals("Bussiness suite")).First(),
                     imageUrl = "https://content.office-hub.com/wp-content/uploads/2018/07/wework-private-office.jpg",
                     services = new List<string> {"Швидкісне Wi-Fi з'єднання", "Закріплене робоче місце", "Доступ до кухні", "Електронна перепустка", "Доступ до зони відпочинку", "Доступ до спортзалу", "Локер", "Гостьовий візит", "Послуги юриста", "Технічна підтримка"},
                     tariffs = new List<Tariff> {
@@ -88,13 +92,14 @@ public class MockRoom : IRoom
                     }
                 }
             };
+            }
         }
-    }
 
-    public IEnumerable<Room> PopularRooms { get; set; }
+        public IEnumerable<Room> PopularRooms { get; set; }
 
-    public Room getById(int id)
-    {
-        throw new System.NotImplementedException();
+        public Room getById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

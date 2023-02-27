@@ -1,7 +1,12 @@
-public class Tariff
+using CoworkingApp.Data.Models.Utils;
+
+namespace CoworkingApp.Data.Models
 {
-    public int id { set; get; }
-    public int roomId { set; get; }
-    public TimeUnit timeUnit { set; get; }
-    public double pricePerUnit { set; get; }
+    public class Tariff
+    {
+        public int id { set; get; }
+        public int roomId { set; get; }
+        public TimeUnit timeUnit { set; get; }
+        public double pricePerUnit { set; get; }
+    }
 }

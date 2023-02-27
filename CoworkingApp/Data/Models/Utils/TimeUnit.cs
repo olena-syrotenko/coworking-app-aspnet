@@ -1,7 +1,10 @@
-public enum TimeUnit
+namespace CoworkingApp.Data.Models.Utils
 {
-    Day = 1,
-    Week = 2,
-    Month = 3,
-    Year = 4
+    public enum TimeUnit
+    {
+        Day = 1,
+        Week = 2,
+        Month = 3,
+        Year = 4
+    }
 }

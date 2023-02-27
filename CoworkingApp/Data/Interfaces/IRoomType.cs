@@ -1,6 +1,10 @@
+using CoworkingApp.Data.Models;
 using System.Collections.Generic;
 
-public interface IRoomType
+namespace CoworkingApp.Data.Interfaces
 {
-    IEnumerable<RoomType> AllRoomTypes { get; }
+    public interface IRoomType
+    {
+        IEnumerable<RoomType> AllRoomTypes { get; }
+    }
 }

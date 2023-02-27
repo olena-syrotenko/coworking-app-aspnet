@@ -1,12 +1,16 @@
+using CoworkingApp.Data.Interfaces;
+using CoworkingApp.Data.Models;
 using System.Collections.Generic;
 
-public class MockEquipmentType : IEquipmentType
+namespace CoworkingApp.Data.Mocks
 {
-    public IEnumerable<EquipmentType> AllEquipmentTypes
+    public class MockEquipmentType : IEquipmentType
     {
-        get
+        public IEnumerable<EquipmentType> AllEquipmentTypes
         {
-            return new List<EquipmentType>
+            get
+            {
+                return new List<EquipmentType>
             {
                 new EquipmentType {name = "Клавіатура", price = 120},
                 new EquipmentType {name = "Комп'ютерна миша", price = 50},
@@ -15,6 +19,7 @@ public class MockEquipmentType : IEquipmentType
                 new EquipmentType {name = "Графічний планшет", price = 500},
                 new EquipmentType {name = "Навушники", price = 50}
             };
+            }
         }
     }
 }
