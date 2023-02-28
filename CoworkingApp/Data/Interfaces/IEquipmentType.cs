@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace CoworkingApp.Data.Interfaces
 {
-    public interface IEquipmentType
-    {
-        IEnumerable<EquipmentType> AllEquipmentTypes { get; }
-    }
+	public interface IEquipmentType
+	{
+		IEnumerable<EquipmentType> AllEquipmentTypes { get; }
+	}
 }

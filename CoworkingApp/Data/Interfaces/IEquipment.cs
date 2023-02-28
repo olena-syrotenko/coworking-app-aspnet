@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace CoworkingApp.Data.Interfaces
 {
-    public interface IEquipment
-    {
-        IEnumerable<Equipment> AllEquipment { get; }
-        Equipment getById(int id);
-    }
+	public interface IEquipment
+	{
+		IEnumerable<Equipment> AllEquipment { get; }
+		Equipment getById(int id);
+	}
 }
