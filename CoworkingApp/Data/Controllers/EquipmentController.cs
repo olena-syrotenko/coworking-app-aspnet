@@ -1,5 +1,5 @@
 using CoworkingApp.Data.Interfaces;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CoworkingApp.Data.Controllers
 {

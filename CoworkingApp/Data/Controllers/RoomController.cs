@@ -1,6 +1,6 @@
 using CoworkingApp.Data.Interfaces;
 using CoworkingApp.ViewModels;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CoworkingApp.Data.Controllers
 {
@@ -16,6 +16,7 @@ namespace CoworkingApp.Data.Controllers
         }
         public ViewResult List()
         {
+            ViewBag.Title = "Сторінка з кімнатами";
             RoomListViewModels roomListViewModels = new RoomListViewModels();
             roomListViewModels.allRooms = _rooms.AllRooms;
             roomListViewModels.currentType = "Кімнати";
