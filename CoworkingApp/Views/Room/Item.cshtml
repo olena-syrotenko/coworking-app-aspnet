@@ -1,13 +1,13 @@
-<h2 class="text-center">@Model.name</h2>
+п»ї<h2 class="text-center">@Model.name</h2>
 <div class="line"></div>
 <div class="d-flex flex-row justify-content-center align-items-center">
 	<div class="w-50 item-description">
-		<p>@Model.roomType.description</p>
-		<p>Тип: @Model.roomType.name</p>
-		<p>Площа: @Model.area м<sup>2</sup></p>
-		<p>Загальна кількість місць: @Model.maxPlaces</p>
-		<p>
-			Тарифи:
+		<p><i class="fa-solid fa-question"></i> @Model.roomType.description</p>
+		<p><i class="fa-solid fa-briefcase"></i> РўРёРї: @Model.roomType.name</p>
+		<p><i class="fa-regular fa-square"></i> РџР»РѕС‰Р°: @Model.area Рј<sup>2</sup></p>
+		<p><i class="fa-solid fa-laptop"></i> Р—Р°РіР°Р»СЊРЅР° РєС–Р»СЊРєС–СЃС‚СЊ РјС–СЃС†СЊ: @Model.maxPlaces</p>
+		<p><i class="fa-solid fa-magnifying-glass-dollar"></i> 
+			РўР°СЂРёС„Рё:
 			@{
 				foreach (var price in @Model.tariffs)
 				{
@@ -15,8 +15,8 @@
 				}
 			}
 		</p>
-		<p>
-			Додаткові послуги:
+		<p><i class="fa-solid fa-circle-plus"></i> 
+			Р”РѕРґР°С‚РєРѕРІС– РїРѕСЃР»СѓРіРё:
 			<ul>
 				@{
 					foreach (var service in @Model.services)
