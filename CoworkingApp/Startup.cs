@@ -18,8 +18,6 @@ namespace CoworkingApp
 			_confString = new ConfigurationBuilder().SetBasePath(hostEnv.ContentRootPath).AddJsonFile("dbsettings.json").Build();
 		}
 
-		// _confString.GetConnectionString("DefaultConnection")
-
 		public void ConfigureServices(IServiceCollection services)
 		{
 			var connection = _confString.GetConnectionString("DefaultConnection");
