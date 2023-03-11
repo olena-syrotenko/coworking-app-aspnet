@@ -2,7 +2,7 @@
 <div class="line"></div>
 <div class="d-flex flex-row justify-content-center align-items-center">
 	<div class="w-50 item-description">
-		<p><i class="fa-solid fa-question"></i> @Model.roomType.description</p>
+        <p><i class="fa-solid fa-question"></i> @Model.roomType.description  @Model.description</p>
 		<p><i class="fa-solid fa-briefcase"></i> Тип: @Model.roomType.name</p>
 		<p><i class="fa-regular fa-square"></i> Площа: @Model.area м<sup>2</sup></p>
 		<p><i class="fa-solid fa-laptop"></i> Загальна кількість місць: @Model.maxPlaces</p>
@@ -11,7 +11,7 @@
 			@{
 				foreach (var price in @Model.tariffs)
 				{
-					<span> <b>@price.pricePerUnit</b>/@price.timeUnit.ToString()  </span>
+					<span> <b>@price.pricePerUnit</b>/@price.timeUnit.name  </span>
 				}
 			}
 		</p>
@@ -21,7 +21,7 @@
 				@{
 					foreach (var service in @Model.services)
 					{
-						<li>@service</li>
+						<li>@service.name</li>
 					}
 				}
 			</ul>

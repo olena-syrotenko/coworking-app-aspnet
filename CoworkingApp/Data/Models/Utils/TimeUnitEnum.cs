@@ -1,6 +1,6 @@
 namespace CoworkingApp.Data.Models.Utils
 {
-	public enum TimeUnit
+	public enum TimeUnitEnum
 	{
 		Day = 1,
 		Week = 2,

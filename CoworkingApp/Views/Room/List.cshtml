@@ -13,7 +13,7 @@
 				@{
 					foreach (var price in room.tariffs)
 					{
-						<span> @price.pricePerUnit/@price.timeUnit.ToString()  </span>
+						<span> @price.pricePerUnit/@price.timeUnit.name  </span>
 					}
 				}
 			</p>
