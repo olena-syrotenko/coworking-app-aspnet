@@ -43,21 +43,6 @@ namespace CoworkingApp.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "TimeUnit",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    name = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TimeUnit", x => x.id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "Room",
                 columns: table => new
                 {
@@ -67,6 +52,7 @@ namespace CoworkingApp.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     area = table.Column<double>(type: "double", nullable: false),
                     maxPlaces = table.Column<int>(type: "int", nullable: false),
+                    price = table.Column<double>(type: "double", nullable: false),
                     imageUrl = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     description = table.Column<string>(type: "longtext", nullable: true)
@@ -80,6 +66,28 @@ namespace CoworkingApp.Migrations
                         name: "FK_Room_RoomType_roomTypeId",
                         column: x => x.roomTypeId,
                         principalTable: "RoomType",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Place",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    code = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    roomId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Place", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Place_Room_roomId",
+                        column: x => x.roomId,
+                        principalTable: "Room",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -110,33 +118,10 @@ namespace CoworkingApp.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.CreateTable(
-                name: "Tariff",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    roomId = table.Column<int>(type: "int", nullable: false),
-                    timeUnitId = table.Column<int>(type: "int", nullable: false),
-                    pricePerUnit = table.Column<double>(type: "double", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tariff", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_Tariff_Room_roomId",
-                        column: x => x.roomId,
-                        principalTable: "Room",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Tariff_TimeUnit_timeUnitId",
-                        column: x => x.timeUnitId,
-                        principalTable: "TimeUnit",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
+            migrationBuilder.CreateIndex(
+                name: "IX_Place_roomId",
+                table: "Place",
+                column: "roomId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Room_roomTypeId",
@@ -147,34 +132,21 @@ namespace CoworkingApp.Migrations
                 name: "IX_RoomService_servicesid",
                 table: "RoomService",
                 column: "servicesid");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tariff_roomId",
-                table: "Tariff",
-                column: "roomId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tariff_timeUnitId",
-                table: "Tariff",
-                column: "timeUnitId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Place");
+
+            migrationBuilder.DropTable(
                 name: "RoomService");
-
-            migrationBuilder.DropTable(
-                name: "Tariff");
-
-            migrationBuilder.DropTable(
-                name: "Service");
 
             migrationBuilder.DropTable(
                 name: "Room");
 
             migrationBuilder.DropTable(
-                name: "TimeUnit");
+                name: "Service");
 
             migrationBuilder.DropTable(
                 name: "RoomType");

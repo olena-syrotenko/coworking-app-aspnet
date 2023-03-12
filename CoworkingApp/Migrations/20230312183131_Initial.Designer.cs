@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoworkingApp.Migrations
 {
     [DbContext(typeof(AppDbContent))]
-    [Migration("20230311151327_Initial")]
+    [Migration("20230312183131_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -17,6 +17,25 @@ namespace CoworkingApp.Migrations
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.17");
+
+            modelBuilder.Entity("CoworkingApp.Data.Models.Place", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("code")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("roomId")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("roomId");
+
+                    b.ToTable("Place");
+                });
 
             modelBuilder.Entity("CoworkingApp.Data.Models.Room", b =>
                 {
@@ -38,6 +57,9 @@ namespace CoworkingApp.Migrations
 
                     b.Property<string>("name")
                         .HasColumnType("longtext");
+
+                    b.Property<double>("price")
+                        .HasColumnType("double");
 
                     b.Property<int>("roomTypeId")
                         .HasColumnType("int");
@@ -80,44 +102,6 @@ namespace CoworkingApp.Migrations
                     b.ToTable("Service");
                 });
 
-            modelBuilder.Entity("CoworkingApp.Data.Models.Tariff", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<double>("pricePerUnit")
-                        .HasColumnType("double");
-
-                    b.Property<int>("roomId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("timeUnitId")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("roomId");
-
-                    b.HasIndex("timeUnitId");
-
-                    b.ToTable("Tariff");
-                });
-
-            modelBuilder.Entity("CoworkingApp.Data.Models.TimeUnit", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("name")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("id");
-
-                    b.ToTable("TimeUnit");
-                });
-
             modelBuilder.Entity("RoomService", b =>
                 {
                     b.Property<int>("roomsid")
@@ -133,6 +117,17 @@ namespace CoworkingApp.Migrations
                     b.ToTable("RoomService");
                 });
 
+            modelBuilder.Entity("CoworkingApp.Data.Models.Place", b =>
+                {
+                    b.HasOne("CoworkingApp.Data.Models.Room", "room")
+                        .WithMany("places")
+                        .HasForeignKey("roomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("room");
+                });
+
             modelBuilder.Entity("CoworkingApp.Data.Models.Room", b =>
                 {
                     b.HasOne("CoworkingApp.Data.Models.RoomType", "roomType")
@@ -142,23 +137,6 @@ namespace CoworkingApp.Migrations
                         .IsRequired();
 
                     b.Navigation("roomType");
-                });
-
-            modelBuilder.Entity("CoworkingApp.Data.Models.Tariff", b =>
-                {
-                    b.HasOne("CoworkingApp.Data.Models.Room", null)
-                        .WithMany("tariffs")
-                        .HasForeignKey("roomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CoworkingApp.Data.Models.TimeUnit", "timeUnit")
-                        .WithMany("tariffs")
-                        .HasForeignKey("timeUnitId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("timeUnit");
                 });
 
             modelBuilder.Entity("RoomService", b =>
@@ -178,17 +156,12 @@ namespace CoworkingApp.Migrations
 
             modelBuilder.Entity("CoworkingApp.Data.Models.Room", b =>
                 {
-                    b.Navigation("tariffs");
+                    b.Navigation("places");
                 });
 
             modelBuilder.Entity("CoworkingApp.Data.Models.RoomType", b =>
                 {
                     b.Navigation("rooms");
-                });
-
-            modelBuilder.Entity("CoworkingApp.Data.Models.TimeUnit", b =>
-                {
-                    b.Navigation("tariffs");
                 });
 #pragma warning restore 612, 618
         }
