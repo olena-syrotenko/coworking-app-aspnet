@@ -36,6 +36,13 @@ namespace CoworkingApp
 			app.UseStatusCodePages();
 			app.UseStaticFiles();
 			app.UseMvcWithDefaultRoute();
+
+			using (var scope = app.ApplicationServices.CreateScope())
+			{
+				AppDbContent content = scope.ServiceProvider.GetRequiredService<AppDbContent>();
+				DbObjects.Initial(content);
+			}
+
 		}
 	}
 }

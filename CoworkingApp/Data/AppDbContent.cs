@@ -10,6 +10,10 @@ namespace CoworkingApp.Data
 		public DbSet<Room> Room { get; set; }
 
 		public DbSet<RoomType> RoomType { get; set; }
+		
+		public DbSet<Place> Place { get; set; }
+
+		public DbSet<Service> Service { get; set; }
 
 	}
 }

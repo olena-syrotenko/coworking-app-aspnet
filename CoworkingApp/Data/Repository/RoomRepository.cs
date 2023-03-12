@@ -16,7 +16,7 @@ namespace CoworkingApp.Repository
 			this.appDbContent = appDbContent;
 		}
 
-		public IEnumerable<Room> AllRooms => appDbContent.Room.Include(r => r.roomType);
+		public IEnumerable<Room> AllRooms => appDbContent.Room.Include(r => r.roomType).Include(r => r.services);
 
 		public IEnumerable<Room> PopularRooms { get => throw new System.NotImplementedException(); }
 
