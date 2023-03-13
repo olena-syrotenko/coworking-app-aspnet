@@ -118,7 +118,7 @@ namespace CoworkingApp.Data.Mocks
 					maxPlaces = 1,
 					price = 150,
 					roomType = _roomType.AllRoomTypes.Where(type => type.name.Equals("Skype room")).First(),
-					imageUrl = "/img/skype_room.jpg",
+					imageUrl = "/img/skype_room_black.jpg",
 					isFavourite = true,
 					services = new List<Service> {
 						new Service {name = "Ўвидк≥сне Wi-Fi з'Їднанн€" },

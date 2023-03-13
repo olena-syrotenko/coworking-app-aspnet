@@ -208,7 +208,7 @@ namespace CoworkingApp.Data
                             maxPlaces = 1,
                             price = 150,
                             roomType =  RoomTypes["Skype room"],
-                            imageUrl = "/img/skype_room.jpg",
+                            imageUrl = "/img/skype_room_black.jpg",
                             isFavourite = false,
                             services = new List<Service> {
                                 Services["Ўвидк≥сне Wi-Fi з'Їднанн€"],
@@ -422,7 +422,7 @@ namespace CoworkingApp.Data
                             maxPlaces = 1,
                             price = 80,
                             roomType =  RoomTypes["Skype room"],
-                            imageUrl = "/img/skype_room_black.jpg",
+                            imageUrl = "/img/skype_room.jpg",
                             isFavourite = true,
                             services = new List<Service> {
                                 Services["Ўвидк≥сне Wi-Fi з'Їднанн€"],
