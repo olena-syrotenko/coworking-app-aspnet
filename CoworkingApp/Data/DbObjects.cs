@@ -331,7 +331,7 @@ namespace CoworkingApp.Data
                             price = 180,
                             roomType =  RoomTypes["Open space"],
                             imageUrl = "/img/open_space_big.jpg",
-                            isFavourite = false,
+                            isFavourite = true,
                             services = new List<Service> {
                                 Services["Швидкісне Wi-Fi з'єднання"],
                                 Services["Незакріплене робоче місце"],
@@ -340,7 +340,6 @@ namespace CoworkingApp.Data
                                 Services["Доступ до зони відпочинку"],
                                 Services["Принтер/сканер"]
                             },
-                            isFavourite = true,
                         },
                         new Room
                         {
