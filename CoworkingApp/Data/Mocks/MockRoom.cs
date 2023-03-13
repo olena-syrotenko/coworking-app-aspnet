@@ -23,6 +23,7 @@ namespace CoworkingApp.Data.Mocks
 					price = 120,
 					roomType = _roomType.AllRoomTypes.Where(type => type.name.Equals("Open space")).First(),
 					imageUrl = "/img/open_space.jpeg",
+					isFavourite = false,
 					services = new List<Service> {
 						new Service {name = "Швидкісне Wi-Fi з'єднання" },
 						new Service {name = "Незакріплене робоче місце" },
@@ -40,6 +41,7 @@ namespace CoworkingApp.Data.Mocks
 					maxPlaces = 15,
 					price = 70,
 					roomType = _roomType.AllRoomTypes.Where(type => type.name.Equals("Lounge zone")).First(),
+					isFavourite = true,
 					services = new List<Service> {
 						new Service {name = "Швидкісне Wi-Fi з'єднання" },
 						new Service {name = "Незакріплене робоче місце" },
@@ -56,6 +58,7 @@ namespace CoworkingApp.Data.Mocks
 					price = 500,
 					roomType = _roomType.AllRoomTypes.Where(type => type.name.Equals("Business suite")).First(),
 					imageUrl = "/img/business_suite.jpg",
+					isFavourite = false,
 					services = new List<Service> { new Service { name = "Швидкісне Wi-Fi з'єднання" },
 						new Service {name = "Закріплене робоче місце" },
 						new Service {name = "Доступ до кухні" },
@@ -77,6 +80,7 @@ namespace CoworkingApp.Data.Mocks
 					price = 300,
 					roomType = _roomType.AllRoomTypes.Where(type => type.name.Equals("Private office")).First(),
 					imageUrl = "/img/private_office.jpeg",
+					isFavourite = true,
 					services = new List<Service> {
 						new Service {name = "Швидкісне Wi-Fi з'єднання" },
 						new Service {name = "Закріплене робоче місце" },
@@ -97,6 +101,7 @@ namespace CoworkingApp.Data.Mocks
 					roomType = _roomType.AllRoomTypes.Where(type => type.name.Equals("Meeting room")).First(),
 					price = 250,
 					imageUrl = "/img/meeting_room.jpeg",
+					isFavourite = false,
 					services = new List<Service> {
 						new Service {name = "Швидкісне Wi-Fi з'єднання" },
 						new Service {name = "Фліпчарт" },
@@ -114,6 +119,7 @@ namespace CoworkingApp.Data.Mocks
 					price = 150,
 					roomType = _roomType.AllRoomTypes.Where(type => type.name.Equals("Skype room")).First(),
 					imageUrl = "/img/skype_room.jpg",
+					isFavourite = true,
 					services = new List<Service> {
 						new Service {name = "Швидкісне Wi-Fi з'єднання" },
 						new Service {name = "Технічне забезпечення" },
@@ -126,7 +132,9 @@ namespace CoworkingApp.Data.Mocks
 
 		public IEnumerable<Room> PopularRooms { get; }
 
-		public Room getById(int id)
+        public IEnumerable<Room> FavouriteRooms { get; }
+
+        public Room getById(int id)
 		{
 			throw new System.NotImplementedException();
 		}

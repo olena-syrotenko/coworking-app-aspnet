@@ -111,6 +111,7 @@ namespace CoworkingApp.Data
                             maxPlaces = 20,
                             price = 120,
                             roomType = RoomTypes["Open space"],
+                            isFavourite = false,
                             imageUrl = "/img/open_space.jpeg",
                             services = new List<Service> {
                                 Services["Швидкісне Wi-Fi з'єднання"],
@@ -135,6 +136,7 @@ namespace CoworkingApp.Data
                                 Services["Доступ до зони відпочинку"]
                             },
                             imageUrl = "/img/lounge_zone.jpg",
+                            isFavourite = true,
                         },
                         new Room
                         {
@@ -145,6 +147,7 @@ namespace CoworkingApp.Data
                             price = 500,
                             roomType =  RoomTypes["Business suite"],
                             imageUrl = "/img/business_suite.jpg",
+                            isFavourite = false,
                             services = new List<Service> {  
                                 Services["Швидкісне Wi-Fi з'єднання"],
                                 Services["Закріплене робоче місце"],
@@ -167,6 +170,7 @@ namespace CoworkingApp.Data
                             price = 300,
                             roomType = RoomTypes["Private office"],
                             imageUrl = "/img/private_office.jpeg",
+                            isFavourite = false,
                             services = new List<Service> {
                                 Services["Швидкісне Wi-Fi з'єднання"],
                                 Services["Закріплене робоче місце"],
@@ -187,6 +191,7 @@ namespace CoworkingApp.Data
                             roomType =  RoomTypes["Meeting room"],
                             price = 250,
                             imageUrl = "/img/meeting_room.jpeg",
+                            isFavourite = false,
                             services = new List<Service> {
                                 Services["Швидкісне Wi-Fi з'єднання"],
                                 Services["Фліпчарт"],
@@ -204,6 +209,7 @@ namespace CoworkingApp.Data
                             price = 150,
                             roomType =  RoomTypes["Skype room"],
                             imageUrl = "/img/skype_room.jpg",
+                            isFavourite = false,
                             services = new List<Service> {
                                 Services["Швидкісне Wi-Fi з'єднання"],
                                 Services["Технічне забезпечення"],
@@ -219,6 +225,7 @@ namespace CoworkingApp.Data
                             price = 100,
                             roomType =  RoomTypes["Open space"],
                             imageUrl = "/img/open_space_helsinki.jpg",
+                            isFavourite = false,
                             services = new List<Service> {
                                 Services["Швидкісне Wi-Fi з'єднання"],
                                 Services["Незакріплене робоче місце"],
@@ -235,6 +242,7 @@ namespace CoworkingApp.Data
                             price = 100,
                             roomType =  RoomTypes["Lounge zone"],
                             imageUrl = "/img/lounge_zone_boho.jpeg",
+                            isFavourite = false,
                             services = new List<Service> {
                                 Services["Швидкісне Wi-Fi з'єднання"],
                                 Services["Незакріплене робоче місце"],
@@ -251,6 +259,7 @@ namespace CoworkingApp.Data
                             price = 300,
                             roomType = RoomTypes["Business suite"],
                             imageUrl = "/img/business_suite_lyon.jpg",
+                            isFavourite = false,
                             services = new List<Service> {
                                 Services["Швидкісне Wi-Fi з'єднання"],
                                 Services["Незакріплене робоче місце"],
@@ -270,6 +279,7 @@ namespace CoworkingApp.Data
                             price = 400,
                             roomType = RoomTypes["Private office"],
                             imageUrl = "/img/private_office_green.jpg",
+                            isFavourite = true,
                             services = new List<Service> {
                                 Services["Швидкісне Wi-Fi з'єднання"],
                                 Services["Закріплене робоче місце"],
@@ -290,6 +300,7 @@ namespace CoworkingApp.Data
                             roomType =  RoomTypes["Meeting room"],
                             price = 180,
                             imageUrl = "/img/small_meeting_room.jpg",
+                            isFavourite = false,
                             services = new List<Service> {
                                 Services["Швидкісне Wi-Fi з'єднання"],
                                 Services["Технічне забезпечення"],
@@ -305,6 +316,7 @@ namespace CoworkingApp.Data
                             price = 120,
                             roomType =  RoomTypes["Skype room"],
                             imageUrl = "/img/skype_room_ansan.jpg",
+                            isFavourite = false,
                             services = new List<Service> {
                                 Services["Швидкісне Wi-Fi з'єднання"],
                                 Services["Технічна підтримка"]
@@ -319,6 +331,7 @@ namespace CoworkingApp.Data
                             price = 180,
                             roomType =  RoomTypes["Open space"],
                             imageUrl = "/img/open_space_big.jpg",
+                            isFavourite = false,
                             services = new List<Service> {
                                 Services["Швидкісне Wi-Fi з'єднання"],
                                 Services["Незакріплене робоче місце"],
@@ -327,6 +340,7 @@ namespace CoworkingApp.Data
                                 Services["Доступ до зони відпочинку"],
                                 Services["Принтер/сканер"]
                             },
+                            isFavourite = true,
                         },
                         new Room
                         {
@@ -337,6 +351,7 @@ namespace CoworkingApp.Data
                             price = 150,
                             roomType =  RoomTypes["Lounge zone"],
                             imageUrl = "/img/lounge_zone_circle.jpg",
+                            isFavourite = false,
                             services = new List<Service> {
                                 Services["Швидкісне Wi-Fi з'єднання"],
                                 Services["Незакріплене робоче місце"],
@@ -352,6 +367,7 @@ namespace CoworkingApp.Data
                             price = 450,
                             roomType = RoomTypes["Business suite"],
                             imageUrl = "/img/business_suite_tech.png",
+                            isFavourite = true,
                             services = new List<Service> {
                                 Services["Швидкісне Wi-Fi з'єднання"],
                                 Services["Закріплене робоче місце"],
@@ -372,6 +388,7 @@ namespace CoworkingApp.Data
                             price = 300,
                             roomType = RoomTypes["Private office"],
                             imageUrl = "/img/private_office_two_people.jpg",
+                            isFavourite = false,
                             services = new List<Service> {
                                 Services["Швидкісне Wi-Fi з'єднання"],
                                 Services["Закріплене робоче місце"],
@@ -390,6 +407,7 @@ namespace CoworkingApp.Data
                             roomType =  RoomTypes["Meeting room"],
                             price = 250,
                             imageUrl = "/img/meeting_room_open.jpg",
+                            isFavourite = false,
                             services = new List<Service> {
                                 Services["Швидкісне Wi-Fi з'єднання"],
                                 Services["Технічна підтримка"],
@@ -406,6 +424,7 @@ namespace CoworkingApp.Data
                             price = 80,
                             roomType =  RoomTypes["Skype room"],
                             imageUrl = "/img/skype_room_black.jpg",
+                            isFavourite = true,
                             services = new List<Service> {
                                 Services["Швидкісне Wi-Fi з'єднання"],
                                 Services["Доступ до кухні"]
@@ -420,6 +439,7 @@ namespace CoworkingApp.Data
                             price = 120,
                             roomType =  RoomTypes["Open space"],
                             imageUrl = "/img/open_space_industrial.jpeg",
+                            isFavourite = false,
                             services = new List<Service> {
                                 Services["Швидкісне Wi-Fi з'єднання"],
                                 Services["Незакріплене робоче місце"],
@@ -436,6 +456,7 @@ namespace CoworkingApp.Data
                             roomType =  RoomTypes["Meeting room"],
                             price = 300,
                             imageUrl = "/img/meeting_room_big.jpg",
+                            isFavourite = true,
                             services = new List<Service> {
                                 Services["Швидкісне Wi-Fi з'єднання"],
                                 Services["Технічна підтримка"],

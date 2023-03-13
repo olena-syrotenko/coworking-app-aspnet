@@ -6,6 +6,7 @@ namespace CoworkingApp.Data.Interfaces
 	public interface IRoom
 	{
 		IEnumerable<Room> AllRooms { get; }
+		IEnumerable<Room> FavouriteRooms { get; }
 		Room getById(int id);
 	}
 }
