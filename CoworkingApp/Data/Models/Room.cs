@@ -10,7 +10,6 @@ namespace CoworkingApp.Data.Models
 		public int maxPlaces { set; get; }
 		public double price { set; get; }
 		public string imageUrl { set; get; }
-		public string description { set; get; }
 		public List<Service> services { set; get; }
 		public int roomTypeId { set; get; }
 		public virtual RoomType roomType { set; get; }
