@@ -15,5 +15,7 @@ namespace CoworkingApp.Data
 
 		public DbSet<Service> Service { get; set; }
 
+		public DbSet<RentCartItem> RentCartItem { get; set; }
+
 	}
 }

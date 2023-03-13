@@ -1,8 +1,10 @@
 using CoworkingApp.Data;
 using CoworkingApp.Data.Interfaces;
+using CoworkingApp.Data.Models;
 using CoworkingApp.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,14 +26,24 @@ namespace CoworkingApp
 			
 			services.AddTransient<IRoomType, RoomTypeRepository>();
 			services.AddTransient<IRoom, RoomRepository>();
+			services.AddTransient<IPlace, PlaceRepository>();
 			services.AddMvc(mvcOtions => {
 				mvcOtions.EnableEndpointRouting = false;
 			});
 			services.AddDbContext<AppDbContent>(options => options.UseMySql(connection, ServerVersion.AutoDetect(connection)));
+			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+			services.AddScoped(sp => RentCart.GetCart(sp));
+			services.AddMvc(mvcOtions =>
+			{
+				mvcOtions.EnableEndpointRouting = false;
+			});
+			services.AddMemoryCache();
+			services.AddSession();
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
+			app.UseSession();
 			app.UseDeveloperExceptionPage();
 			app.UseStatusCodePages();
 			app.UseStaticFiles();

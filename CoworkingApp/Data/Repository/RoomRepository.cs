@@ -18,8 +18,6 @@ namespace CoworkingApp.Repository
 
 		public IEnumerable<Room> AllRooms => appDbContent.Room.Include(r => r.roomType).Include(r => r.services);
 
-		public IEnumerable<Room> PopularRooms { get => throw new System.NotImplementedException(); }
-
 		public Room getById(int id) => appDbContent.Room.FirstOrDefault(r => r.id == id);
 	}
 }

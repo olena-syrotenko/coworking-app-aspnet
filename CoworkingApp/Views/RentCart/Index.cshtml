@@ -1,0 +1,13 @@
+﻿@model RentCartViewModel
+<div class="container">
+    @foreach (var el in Model.rentCart.rentCartItems)
+    {
+    <div class="alert-warning mt-3">
+        <b>Робоче місце:</b> @el.place.code<br />
+        <b>Сума орендної плати:</b> @el.price.ToString("c")
+        <b>Період оренди:</b> @el.rentStart.ToString("c") -  @el.rentEnd.ToString("c")
+    </div>
+    }
+    <hr />
+    <div class="btn btn-danger" asp-controller="Order">Сплатити</div>
+</div>
