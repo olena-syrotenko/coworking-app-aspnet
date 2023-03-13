@@ -1,0 +1,10 @@
+﻿@model HomeViewModel
+<div class="row mt-4 mb-2">
+    <h2 class="text-center mb-4">Наші резиденти рекомендують</h2>
+    @{
+        foreach (Room room in Model.favouriteRooms)
+        {
+            @Html.Partial("AllRooms", room)
+        }
+    }
+</div>

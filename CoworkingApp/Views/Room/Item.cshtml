@@ -1,25 +1,24 @@
-﻿<h2 class="text-center">@Model.name</h2>
+﻿@model Room
+<h2 class="text-center">@Model.name</h2>
 <div class="line"></div>
 <div class="d-flex flex-row justify-content-center align-items-center">
-	<div class="w-50 item-description">
+    <div class="w-50 item-description">
         <p><i class="fa-solid fa-question"></i> @Model.roomType.description</p>
-		<p><i class="fa-solid fa-briefcase"></i> Тип: @Model.roomType.name</p>
-		<p><i class="fa-regular fa-square"></i> Площа: @Model.area м<sup>2</sup></p>
-		<p><i class="fa-solid fa-laptop"></i> Загальна кількість місць: @Model.maxPlaces</p>
-		<p><i class="fa-solid fa-magnifying-glass-dollar"></i> Ціна: @Model.price/день</p>
-		<p><i class="fa-solid fa-circle-plus"></i> 
-			Додаткові послуги:
-			<ul>
-				@{
-					foreach (var service in @Model.services)
-					{
-						<li>@service.name</li>
-					}
-				}
-			</ul>
-		</p>
-	</div>
-	<div class="w-50">
-		<img class="img-thumbnail" src="@Model.imageUrl" alt="@Model.name" />
-	</div>
+        <p><i class="fa-solid fa-briefcase"></i> Тип: @Model.roomType.name</p>
+        <p><i class="fa-regular fa-square"></i> Площа: @Model.area м<sup>2</sup></p>
+        <p><i class="fa-solid fa-laptop"></i> Загальна кількість місць: @Model.maxPlaces</p>
+        <p><i class="fa-solid fa-magnifying-glass-dollar"></i> Ціна: @Model.price/день</p>
+        <p>
+            <i class="fa-solid fa-circle-plus"></i>
+            Додаткові послуги:
+            <ul>
+                @{ foreach (var service in @Model.services)
+                                {
+                    <li>@service.name</li> } }
+            </ul>
+        </p>
+    </div>
+    <div class="w-50">
+        <img class="img-thumbnail" src="@Model.imageUrl" alt="@Model.name" />
+    </div>
 </div>

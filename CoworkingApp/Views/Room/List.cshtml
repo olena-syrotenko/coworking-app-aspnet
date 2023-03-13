@@ -1,19 +1,9 @@
-﻿<h2>@Model.currentType</h2>
+﻿@model RoomListViewModels
+<h2>@Model.currentType</h2>
 <div class="row mt-5 mb-2">
-	@{
-		foreach (var room in Model.allRooms)
-		{
-		<div class="col-lg-4">
-			<img class="img-thumbnail" src="@room.imageUrl" alt="@room.name" />
-			<h4>@room.name - @room.roomType.name</h4>
-			<p>Площа: @room.area м<sup>2</sup></p>
-			<p>Загальна кількість місць: @room.maxPlaces</p>
-			<p>Ціна: @room.price/день</p>
-			<p>
-				<a class="btn btn-outline-dark"
-				   href="#">Детальніше</a>
-			</p>
-		</div>
-		}
-	}
+    @{ foreach (var room in Model.allRooms)
+        {
+            @Html.Partial("AllRooms", room)
+        } 
+    }
 </div>
