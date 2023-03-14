@@ -51,12 +51,12 @@ namespace CoworkingApp.Data
                 {
                     var roomTypeList = new List<RoomType>
                     {
-                        new RoomType {name = "Open space", description = "Великий простір із незакріпленими робочими місцями"},
-                        new RoomType {name = "Lounge zone", description = "Робочий простір із м'якими диванами та релаксуючою атмосферою"},
-                        new RoomType {name = "Private office", description = "Невеликий приватний простір для 2-3 осіб"},
-                        new RoomType {name = "Meeting room", description = "Кімната для проведення зустрічей із усім необхідним обладнанням"},
-                        new RoomType {name = "Skype room", description = "Приватна кімната на одного для дзвінків"},
-                        new RoomType {name = "Business suite", description = "Великий приватний простір для великих команд"}
+                        new RoomType {name = "open space", description = "Великий простір із незакріпленими робочими місцями"},
+                        new RoomType {name = "lounge zone", description = "Робочий простір із м'якими диванами та релаксуючою атмосферою"},
+                        new RoomType {name = "private office", description = "Невеликий приватний простір для 2-3 осіб"},
+                        new RoomType {name = "meeting room", description = "Кімната для проведення зустрічей із усім необхідним обладнанням"},
+                        new RoomType {name = "skype room", description = "Приватна кімната на одного для дзвінків"},
+                        new RoomType {name = "business suite", description = "Великий приватний простір для великих команд"}
                     };
                     roomType = new Dictionary<string, RoomType>();
                     roomTypeList.ForEach(el => roomType.Add(el.name, el));
@@ -110,7 +110,7 @@ namespace CoworkingApp.Data
                             area = 40.5,
                             maxPlaces = 20,
                             price = 120,
-                            roomType = RoomTypes["Open space"],
+                            roomType = RoomTypes["open space"],
                             isFavourite = false,
                             imageUrl = "/img/open_space.jpeg",
                             services = new List<Service> {
@@ -129,7 +129,7 @@ namespace CoworkingApp.Data
                             area = 50,
                             maxPlaces = 15,
                             price = 70,
-                            roomType =  RoomTypes["Lounge zone"],
+                            roomType =  RoomTypes["lounge zone"],
                             services = new List<Service> {
                                 Services["Швидкісне Wi-Fi з'єднання"],
                                 Services["Незакріплене робоче місце"],
@@ -145,7 +145,7 @@ namespace CoworkingApp.Data
                             area = 100,
                             maxPlaces = 20,
                             price = 500,
-                            roomType =  RoomTypes["Business suite"],
+                            roomType =  RoomTypes["business suite"],
                             imageUrl = "/img/business_suite.jpg",
                             isFavourite = false,
                             services = new List<Service> {  
@@ -168,7 +168,7 @@ namespace CoworkingApp.Data
                             area = 20,
                             maxPlaces = 4,
                             price = 300,
-                            roomType = RoomTypes["Private office"],
+                            roomType = RoomTypes["private office"],
                             imageUrl = "/img/private_office.jpeg",
                             isFavourite = false,
                             services = new List<Service> {
@@ -188,7 +188,7 @@ namespace CoworkingApp.Data
                             name = "New York",
                             area = 10,
                             maxPlaces = 1,
-                            roomType =  RoomTypes["Meeting room"],
+                            roomType =  RoomTypes["meeting room"],
                             price = 250,
                             imageUrl = "/img/meeting_room.jpeg",
                             isFavourite = false,
@@ -207,7 +207,7 @@ namespace CoworkingApp.Data
                             area = 3,
                             maxPlaces = 1,
                             price = 150,
-                            roomType =  RoomTypes["Skype room"],
+                            roomType =  RoomTypes["skype room"],
                             imageUrl = "/img/skype_room_black.jpg",
                             isFavourite = false,
                             services = new List<Service> {
@@ -223,7 +223,7 @@ namespace CoworkingApp.Data
                             area = 25,
                             maxPlaces = 10,
                             price = 100,
-                            roomType =  RoomTypes["Open space"],
+                            roomType =  RoomTypes["open space"],
                             imageUrl = "/img/open_space_helsinki.jpg",
                             isFavourite = false,
                             services = new List<Service> {
@@ -240,7 +240,7 @@ namespace CoworkingApp.Data
                             area = 30,
                             maxPlaces = 8,
                             price = 100,
-                            roomType =  RoomTypes["Lounge zone"],
+                            roomType =  RoomTypes["lounge zone"],
                             imageUrl = "/img/lounge_zone_boho.jpeg",
                             isFavourite = false,
                             services = new List<Service> {
@@ -257,7 +257,7 @@ namespace CoworkingApp.Data
                             area = 50,
                             maxPlaces = 10,
                             price = 300,
-                            roomType = RoomTypes["Business suite"],
+                            roomType = RoomTypes["business suite"],
                             imageUrl = "/img/business_suite_lyon.jpg",
                             isFavourite = false,
                             services = new List<Service> {
@@ -277,7 +277,7 @@ namespace CoworkingApp.Data
                             area = 60,
                             maxPlaces = 10,
                             price = 400,
-                            roomType = RoomTypes["Private office"],
+                            roomType = RoomTypes["private office"],
                             imageUrl = "/img/private_office_green.jpg",
                             isFavourite = true,
                             services = new List<Service> {
@@ -297,7 +297,7 @@ namespace CoworkingApp.Data
                             name = "Seul",
                             area = 6,
                             maxPlaces = 1,
-                            roomType =  RoomTypes["Meeting room"],
+                            roomType =  RoomTypes["meeting room"],
                             price = 180,
                             imageUrl = "/img/small_meeting_room.jpg",
                             isFavourite = false,
@@ -314,7 +314,7 @@ namespace CoworkingApp.Data
                             area = 2,
                             maxPlaces = 1,
                             price = 120,
-                            roomType =  RoomTypes["Skype room"],
+                            roomType =  RoomTypes["skype room"],
                             imageUrl = "/img/skype_room_ansan.jpg",
                             isFavourite = false,
                             services = new List<Service> {
@@ -329,7 +329,7 @@ namespace CoworkingApp.Data
                             area = 80,
                             maxPlaces = 30,
                             price = 180,
-                            roomType =  RoomTypes["Open space"],
+                            roomType =  RoomTypes["open space"],
                             imageUrl = "/img/open_space_big.jpg",
                             isFavourite = true,
                             services = new List<Service> {
@@ -348,7 +348,7 @@ namespace CoworkingApp.Data
                             area = 40,
                             maxPlaces = 10,
                             price = 150,
-                            roomType =  RoomTypes["Lounge zone"],
+                            roomType =  RoomTypes["lounge zone"],
                             imageUrl = "/img/lounge_zone_circle.jpg",
                             isFavourite = false,
                             services = new List<Service> {
@@ -364,7 +364,7 @@ namespace CoworkingApp.Data
                             area = 40,
                             maxPlaces = 8,
                             price = 450,
-                            roomType = RoomTypes["Business suite"],
+                            roomType = RoomTypes["business suite"],
                             imageUrl = "/img/business_suite_tech.png",
                             isFavourite = true,
                             services = new List<Service> {
@@ -385,7 +385,7 @@ namespace CoworkingApp.Data
                             area = 8,
                             maxPlaces = 2,
                             price = 300,
-                            roomType = RoomTypes["Private office"],
+                            roomType = RoomTypes["private office"],
                             imageUrl = "/img/private_office_two_people.jpg",
                             isFavourite = false,
                             services = new List<Service> {
@@ -403,7 +403,7 @@ namespace CoworkingApp.Data
                             name = "Las Vegas",
                             area = 20,
                             maxPlaces = 1,
-                            roomType =  RoomTypes["Meeting room"],
+                            roomType =  RoomTypes["meeting room"],
                             price = 250,
                             imageUrl = "/img/meeting_room_open.jpg",
                             isFavourite = false,
@@ -421,7 +421,7 @@ namespace CoworkingApp.Data
                             area = 3,
                             maxPlaces = 1,
                             price = 80,
-                            roomType =  RoomTypes["Skype room"],
+                            roomType =  RoomTypes["skype room"],
                             imageUrl = "/img/skype_room.jpg",
                             isFavourite = true,
                             services = new List<Service> {
@@ -436,7 +436,7 @@ namespace CoworkingApp.Data
                             area = 40,
                             maxPlaces = 10,
                             price = 120,
-                            roomType =  RoomTypes["Open space"],
+                            roomType =  RoomTypes["open space"],
                             imageUrl = "/img/open_space_industrial.jpeg",
                             isFavourite = false,
                             services = new List<Service> {
@@ -452,7 +452,7 @@ namespace CoworkingApp.Data
                             name = "Oxford",
                             area = 15,
                             maxPlaces = 1,
-                            roomType =  RoomTypes["Meeting room"],
+                            roomType =  RoomTypes["meeting room"],
                             price = 300,
                             imageUrl = "/img/meeting_room_big.jpg",
                             isFavourite = true,
