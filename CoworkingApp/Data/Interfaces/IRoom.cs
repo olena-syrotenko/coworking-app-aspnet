@@ -8,5 +8,6 @@ namespace CoworkingApp.Data.Interfaces
 		IEnumerable<Room> AllRooms { get; }
 		IEnumerable<Room> FavouriteRooms { get; }
 		Room getById(int id);
+		IEnumerable<Room> getByRoomType(string roomTypeName);
 	}
 }

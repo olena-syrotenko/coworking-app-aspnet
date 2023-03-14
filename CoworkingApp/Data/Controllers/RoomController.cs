@@ -1,6 +1,9 @@
 using CoworkingApp.Data.Interfaces;
+using CoworkingApp.Data.Models;
 using CoworkingApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace CoworkingApp.Data.Controllers
@@ -15,12 +18,31 @@ namespace CoworkingApp.Data.Controllers
 			_rooms = rooms;
 			_roomTypes = roomTypes;
 		}
-		public ViewResult List()
+
+		[Route("Room/List")]
+		[Route("Room/List/{roomType}")]
+		public ViewResult List(string roomType)
 		{
+			IEnumerable<Room> rooms = null;
+			string currType = "";
+			if (string.IsNullOrEmpty(roomType))
+			{
+				rooms = _rooms.AllRooms.OrderBy(i => i.id);
+				currType = "Усі кімнати";
+			}
+			else
+            {
+				currType = roomType.Replace('-', ' ').ToLower();
+				rooms = _rooms.getByRoomType(currType);
+				currType = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(currType);
+			}
+			
+			RoomListViewModels roomListViewModels = new RoomListViewModels()
+			{
+				currentType = currType,
+				allRooms = rooms,
+			};
 			ViewBag.Title = "Сторінка з кімнатами";
-			RoomListViewModels roomListViewModels = new RoomListViewModels();
-			roomListViewModels.allRooms = _rooms.AllRooms;
-			roomListViewModels.currentType = "Кімнати";
 			return View(roomListViewModels);
 		}
 

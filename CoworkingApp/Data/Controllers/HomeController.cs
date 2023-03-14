@@ -13,6 +13,8 @@ namespace CoworkingApp.Data.Controllers
 		{
 			_roomRepository = roomRepository;
 		}
+
+		[Route("")]
 		public ViewResult Index()
 		{
 			var homeRooms = new HomeViewModel
