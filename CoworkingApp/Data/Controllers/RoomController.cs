@@ -2,6 +2,7 @@ using CoworkingApp.Data.Interfaces;
 using CoworkingApp.Data.Models;
 using CoworkingApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace CoworkingApp.Data.Controllers
 				currType = "Усі кімнати";
 			}
 			else
-            {
+			{
 				currType = roomType.Replace('-', ' ').ToLower();
 				rooms = _rooms.getByRoomType(currType);
 				currType = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(currType);
@@ -46,10 +47,23 @@ namespace CoworkingApp.Data.Controllers
 			return View(roomListViewModels);
 		}
 
-		public ViewResult Item()
+		[Route("Room/Item/{roomId}")]
+		public ViewResult Item(int roomId)
 		{
-			ViewBag.Title = "Певна кімната";
-			return View(_rooms.AllRooms.First());
+			Room roomItem = _rooms.getById(roomId);
+			if (roomItem == null)
+            {
+				return HttpNotFound();
+			}
+			ViewBag.Title = roomItem.name;
+			return View(roomItem);
 		}
-	}
+
+        private ViewResult HttpNotFound()
+        {
+			ViewBag.Title = "Not found";
+			ViewBag.Message = "No such rooms";
+			return View("ErrorPage");
+        }
+    }
 }

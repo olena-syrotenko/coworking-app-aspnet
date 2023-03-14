@@ -50,7 +50,7 @@ namespace CoworkingApp
 			app.UseMvcWithDefaultRoute();
 			app.UseMvc(routes => {
 				routes.MapRoute(name: "default", template: "{controller-Home}/{action-Index}/{id?}");
-				routes.MapRoute(name: "categoryFilter", template: "Room/{action}/{roomTypey?}", 
+				routes.MapRoute(name: "categoryFilter", template: "Room/{action}/{roomType?}", 
 					defaults: new { Controller = "Room", action = "List" });
 			});
 
