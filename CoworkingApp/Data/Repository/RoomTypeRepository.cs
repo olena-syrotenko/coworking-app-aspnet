@@ -1,9 +1,8 @@
-using CoworkingApp.Data;
 using CoworkingApp.Data.Interfaces;
 using CoworkingApp.Data.Models;
 using System.Collections.Generic;
 
-namespace CoworkingApp.Repository
+namespace CoworkingApp.Data.Repository
 {
 	public class RoomTypeRepository : IRoomType
 	{

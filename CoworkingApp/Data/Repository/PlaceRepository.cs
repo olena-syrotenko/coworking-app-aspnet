@@ -1,4 +1,3 @@
-using CoworkingApp.Data;
 using CoworkingApp.Data.Interfaces;
 using CoworkingApp.Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -6,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CoworkingApp.Repository
+namespace CoworkingApp.Data.Repository
 {
 	public class PlaceRepository : IPlace
 	{

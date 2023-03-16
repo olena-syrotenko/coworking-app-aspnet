@@ -1,7 +1,7 @@
 using CoworkingApp.Data;
 using CoworkingApp.Data.Interfaces;
 using CoworkingApp.Data.Models;
-using CoworkingApp.Repository;
+using CoworkingApp.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
