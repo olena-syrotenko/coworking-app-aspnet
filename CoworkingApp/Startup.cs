@@ -27,6 +27,7 @@ namespace CoworkingApp
 			services.AddTransient<IRoomType, RoomTypeRepository>();
 			services.AddTransient<IRoom, RoomRepository>();
 			services.AddTransient<IPlace, PlaceRepository>();
+			services.AddTransient<IRentApplication, RentApplicationRepository>();
 			services.AddMvc(mvcOtions => {
 				mvcOtions.EnableEndpointRouting = false;
 			});

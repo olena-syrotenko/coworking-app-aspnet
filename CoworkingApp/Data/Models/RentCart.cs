@@ -17,6 +17,7 @@ namespace CoworkingApp.Data.Models
 		}
 
 		public string RentCartId { get; set; }
+		public double totalPrice { get; set; }
 		public List<RentCartItem> rentCartItems { get; set; }
 
 		public static RentCart GetCart(IServiceProvider services)
@@ -25,18 +26,20 @@ namespace CoworkingApp.Data.Models
 			var context = services.GetService<AppDbContent>();
 			string shopCartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
 			session.SetString("CartId", shopCartId);
-			return new RentCart(context) { RentCartId = shopCartId };
+			return new RentCart(context) { RentCartId = shopCartId, totalPrice = 0 };
 		}
 
 		public void AddToCart(PlaceDto placeDto)
 		{
+			double rentPrice = placeDto.place.room.price * ((placeDto.rentEnd - placeDto.rentStart).Days + 1);
+			totalPrice += rentPrice;
 			appDbContent.RentCartItem.Add(new RentCartItem
 			{
 				rentCartId = RentCartId,
 				place = placeDto.place,
 				rentStart = placeDto.rentStart,
 				rentEnd = placeDto.rentEnd,
-				price = placeDto.place.room.price * ((placeDto.rentEnd - placeDto.rentStart).Days + 1)
+				price = rentPrice
 			});
 			appDbContent.SaveChanges();
 		}

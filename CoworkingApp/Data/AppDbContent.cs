@@ -17,5 +17,9 @@ namespace CoworkingApp.Data
 
 		public DbSet<RentCartItem> RentCartItem { get; set; }
 
+		public DbSet<RentApplication> RentApplication { get; set; }
+		
+		public DbSet<RentApplicationDetail> RentApplicationDetail { get; set; }
+
 	}
 }
