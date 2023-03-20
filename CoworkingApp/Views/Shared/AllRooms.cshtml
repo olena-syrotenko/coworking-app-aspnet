@@ -1,11 +1,11 @@
-﻿<div class="col-lg-4">
+﻿@model Room
+<div class="col-lg-4">
     <img class="img-thumbnail" src="@Model.imageUrl" alt="@Model.name" />
     <h4>@Model.name - @Model.roomType.name</h4>
     <p>Площа: @Model.area м<sup>2</sup></p>
     <p>Загальна кількість місць: @Model.maxPlaces</p>
     <p>Ціна: @Model.price/день</p>
     <p>
-        <a class="btn btn-outline-orange"
-           href="Room/Item/@Model.id">Детальніше</a>
+        <a class="btn btn-outline-orange" asp-controller="Room" asp-action="Item" asp-route-roomId="@Model.id">Детальніше</a>
     </p>
 </div>
