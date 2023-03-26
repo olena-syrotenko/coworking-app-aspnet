@@ -1,5 +1,6 @@
 using CoworkingApp.Data.Interfaces;
 using CoworkingApp.Data.Models;
+using CoworkingApp.Data.Models.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoworkingApp.Data.Controllers
@@ -12,6 +13,33 @@ namespace CoworkingApp.Data.Controllers
         {
             _rentApplications = rentApplications;
             _rentCart = rentCart;
+        }
+
+        [Route("Rent/{roomId}")]
+        public IActionResult Rent(int roomId)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("Rent/{roomId}")]
+        public IActionResult Rent(PlaceDto placeDto, int roomId)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(placeDto);
+            }
+
+            Place availablePlace = _rentApplications.getAvailablePlaceInRoom(placeDto.rentStart, placeDto.rentEnd, roomId);
+
+            if (availablePlace != null)
+            {
+                placeDto.place = availablePlace;
+                placeDto.placeId = availablePlace.id;
+                return View(placeDto);
+            }
+
+            return RedirectToAction("Complete", new { message = "На жаль, на обрані дати немає вільних місць :(" });
         }
 
         public IActionResult Checkout()
@@ -30,14 +58,14 @@ namespace CoworkingApp.Data.Controllers
             if (ModelState.IsValid)
             {
                 _rentApplications.createRentApplication(rentApplication);
-                return RedirectToAction("Complete");
+                return RedirectToAction("Complete", new { message = "Заявку на оренду відправлено на обробку!" });
             }
             return View(rentApplication);
         }
 
-        public IActionResult Complete()
+        public IActionResult Complete(string message)
         {
-            ViewBag.Message = "Заявку на оренду відправлено на обробку!";
+            ViewBag.Message = message;
             return View();
         }
     }

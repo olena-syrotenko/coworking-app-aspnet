@@ -36,7 +36,7 @@ namespace CoworkingApp.Data.Models
 			appDbContent.RentCartItem.Add(new RentCartItem
 			{
 				rentCartId = RentCartId,
-				place = placeDto.place,
+				placeId = placeDto.placeId,
 				rentStart = placeDto.rentStart,
 				rentEnd = placeDto.rentEnd,
 				price = rentPrice
@@ -46,7 +46,9 @@ namespace CoworkingApp.Data.Models
 
 		public List<RentCartItem> getRentItems()
 		{
-			return appDbContent.RentCartItem.Where(p => p.rentCartId == RentCartId).Include(r => r.place).ToList();
+			return appDbContent.RentCartItem.Where(p => p.rentCartId == RentCartId)
+				.Include(r => r.place).ThenInclude(p => p.room).ThenInclude(rm => rm.roomType)
+				.ToList();
 		}
 
 	}

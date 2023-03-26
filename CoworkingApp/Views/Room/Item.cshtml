@@ -7,15 +7,19 @@
         <p><i class="fa-solid fa-briefcase"></i> Тип: @Model.roomType.name</p>
         <p><i class="fa-regular fa-square"></i> Площа: @Model.area м<sup>2</sup></p>
         <p><i class="fa-solid fa-laptop"></i> Загальна кількість місць: @Model.maxPlaces</p>
-        <p><i class="fa-solid fa-magnifying-glass-dollar"></i> Ціна: @Model.price/день</p>
+        <p><i class="fa-solid fa-magnifying-glass-dollar"></i> Ціна: @Model.price.ToString("c")/день</p>
         <p>
             <i class="fa-solid fa-circle-plus"></i>
             Додаткові послуги:
             <ul>
                 @{ foreach (var service in @Model.services)
-                                {
-                    <li>@service.name</li> } }
+                    {
+                        <li>@service.name</li>
+                     } }
             </ul>
+        </p>
+        <p>
+            <a class="btn btn-outline-orange" asp-controller="RentApplication" asp-action="Rent" asp-route-roomId="@Model.id">Вільні місця</a>
         </p>
     </div>
     <div class="w-50">

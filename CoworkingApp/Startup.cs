@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Text.Json.Serialization;
 
 namespace CoworkingApp
 {
@@ -30,6 +31,11 @@ namespace CoworkingApp
 			services.AddTransient<IRentApplication, RentApplicationRepository>();
 			services.AddMvc(mvcOtions => {
 				mvcOtions.EnableEndpointRouting = false;
+			});
+			services.AddControllers().AddJsonOptions(options =>
+			{
+				options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+				options.JsonSerializerOptions.WriteIndented = true;
 			});
 			services.AddDbContext<AppDbContent>(options => options.UseMySql(connection, ServerVersion.AutoDetect(connection)));
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

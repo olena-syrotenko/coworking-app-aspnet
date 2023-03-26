@@ -28,12 +28,12 @@ namespace CoworkingApp.Data.Controllers
             };
             return View(rentCartViewModel);
         }
-        public RedirectToActionResult AddToCart(PlaceDto placeDto)
+
+        [HttpPost]
+        public RedirectToActionResult AddToCart([FromBody] PlaceDto placeDto)
         {
-            var item = _placeRepository.AllPlaces.FirstOrDefault(i => i.id == placeDto.placeId);
-            if (item != null)
+            if (ModelState.IsValid)
             {
-                placeDto.place = item;
                 _rentCart.AddToCart(placeDto);
             }
             return RedirectToAction("Index");

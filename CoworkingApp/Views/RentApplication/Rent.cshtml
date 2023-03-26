@@ -1,0 +1,50 @@
+﻿@model PlaceDto
+<div class="row">
+    
+    <h3>Робочі місця</h3>
+    <form asp-action="Rent" method="post" class="form-horizontal">
+        <div class="form-group">
+            <label asp-for="rentStart"></label>
+            <div class="col-md-5">
+                <input asp-for="rentStart" class="form-control" />
+                <span asp-validation-for="rentStart" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="rentEnd"></label>
+            <div class="col-md-5">
+                <input asp-for="rentEnd" class="form-control" />
+                <span asp-validation-for="rentEnd" class="text-danger"></span>
+            </div>
+        </div>
+        @{
+            if (Model == null || Model.place == null)
+            {
+                <input class="btn btn-outline-orange" type="submit" value="Перевірити наявність" />
+            }
+            else
+            {
+                <p> На обраний період у кімнаті є доступне робоче місце. Бажаєте орендувати? </p>
+                <!-- <p>
+                <a class="btn btn-outline-orange" asp-controller="RentCart" asp-action="AddToCart" asp-route-placeDto="@Model">Додати до кошику</a>
+            </p> -->
+                <button class="btn btn-outline-orange" id="addToCartBtn">Додати до кошику</button>
+            }
+        }
+    </form>
+    
+</div>
+
+<script>
+  const addToCartBtn = document.querySelector('#addToCartBtn');
+  addToCartBtn.addEventListener('click', () => {
+    const placeDto = @Html.Raw(Json.Serialize(Model));
+    fetch('/RentCart/AddToCart', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(placeDto) 
+    });
+  });
+</script>

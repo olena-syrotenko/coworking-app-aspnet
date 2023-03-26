@@ -48,22 +48,15 @@ namespace CoworkingApp.Data.Controllers
 		}
 
 		[Route("Room/Item/{roomId}")]
-		public ViewResult Item(int roomId)
+		public IActionResult Item(int roomId)
 		{
 			Room roomItem = _rooms.getById(roomId);
 			if (roomItem == null)
             {
-				return HttpNotFound();
+				return NotFound("No such rooms");
 			}
 			ViewBag.Title = roomItem.name;
 			return View(roomItem);
 		}
-
-        private ViewResult HttpNotFound()
-        {
-			ViewBag.Title = "Not found";
-			ViewBag.Message = "No such rooms";
-			return View("ErrorPage");
-        }
     }
 }
