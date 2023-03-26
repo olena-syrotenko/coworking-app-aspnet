@@ -49,7 +49,7 @@ namespace CoworkingApp.Data.Repository
                 .Where(rc => isOverlapped(rentStart, rentEnd, rc.rentStart, rc.rentEnd))
                 .Select(rc => rc.placeId);
             return appDbContent.Place
-                .Where(p => p.roomId == roomId && (!placesInRentApplications.Contains(p.id) || !placesInRentCarts.Contains(p.id)))
+                .Where(p => p.roomId == roomId && !(placesInRentApplications.Contains(p.id) || placesInRentCarts.Contains(p.id)))
                 .Include(p => p.room)
                 .FirstOrDefault();
         }
