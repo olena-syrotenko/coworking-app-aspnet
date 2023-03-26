@@ -8,6 +8,6 @@ namespace CoworkingApp.Data.Interfaces
 	{
 		IEnumerable<Place> AllPlaces { get; }
 		Place getById(int id);
-		Place getAvailableInRoom(int roomId, DateTime rentStart, DateTime rentEnd);
+		Place getAvailableInRoom(DateTime rentStart, DateTime rentEnd, int roomId);
 	}
 }

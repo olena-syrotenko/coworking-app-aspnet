@@ -23,6 +23,10 @@ namespace CoworkingApp.Data.Controllers
 			};
 			return View(homeRooms);
 		}
-		
+		public IActionResult Message(string message)
+		{
+			ViewBag.Message = message;
+			return View();
+		}
 	}
 }

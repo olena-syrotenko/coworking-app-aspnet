@@ -18,11 +18,27 @@ namespace CoworkingApp.Data.Repository
 
         public IEnumerable<Place> AllPlaces => appDbContent.Place.Include(p => p.room.roomType).Include(p => p.room.services);
 
-        public Place getAvailableInRoom(int roomId, DateTime rentStart, DateTime rentEnd)
+        public Place getAvailableInRoom(DateTime rentStart, DateTime rentEnd, int roomId)
         {
-            throw new NotImplementedException();
+            IEnumerable<int> placesInRentApplications = appDbContent.RentApplicationDetail
+                .AsEnumerable()
+                .Where(rp => isOverlapped(rentStart, rentEnd, rp.rentStart, rp.rentEnd))
+                .Select(rp => rp.placeId);
+            IEnumerable<int> placesInRentCarts = appDbContent.RentCartItem
+                .AsEnumerable()
+                .Where(rc => isOverlapped(rentStart, rentEnd, rc.rentStart, rc.rentEnd))
+                .Select(rc => rc.placeId);
+            return appDbContent.Place
+                .Where(p => p.roomId == roomId && !(placesInRentApplications.Contains(p.id) || placesInRentCarts.Contains(p.id)))
+                .Include(p => p.room)
+                .FirstOrDefault();
         }
 
         public Place getById(int id) => appDbContent.Place.FirstOrDefault(p => p.id == id);
+
+        private bool isOverlapped(DateTime rentStartToCheck, DateTime rentEndToCheck, DateTime rentStart, DateTime rentEnd)
+        {
+            return rentStartToCheck <= rentEnd && rentStart <= rentEndToCheck;
+        }
     }
 }

@@ -6,7 +6,6 @@ namespace CoworkingApp.Data.Interfaces
 {
     public interface IRentApplication
     {
-        Place getAvailablePlaceInRoom(DateTime rentStart, DateTime rentEnd, int roomId);
         void createRentApplication(RentApplication rentApplication);
     }
 }

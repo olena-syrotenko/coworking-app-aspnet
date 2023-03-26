@@ -29,13 +29,31 @@ namespace CoworkingApp.Data.Controllers
             return View(rentCartViewModel);
         }
 
-        [HttpPost]
-        public RedirectToActionResult AddToCart([FromBody] PlaceDto placeDto)
+        [Route("Rent/{roomId}")]
+        public IActionResult AddToCart(int roomId)
         {
-            if (ModelState.IsValid)
+            return View("Rent");
+        }
+
+        [HttpPost]
+        [Route("Rent/{roomId}")]
+        public IActionResult AddToCart(PlaceDto placeDto, int roomId)
+        {
+            if (!ModelState.IsValid)
             {
-                _rentCart.AddToCart(placeDto);
+                return View("Rent", placeDto);
             }
+
+            Place availablePlace = _placeRepository.getAvailableInRoom(placeDto.rentStart, placeDto.rentEnd, roomId);
+
+            if (availablePlace == null)
+            {
+                return RedirectToAction("Message", "Home", new { message = "На жаль, на обрані дати немає вільних місць :(" });
+            }
+
+            placeDto.place = availablePlace;
+            placeDto.placeId = availablePlace.id;
+            _rentCart.AddToCart(placeDto);
             return RedirectToAction("Index");
         }
 
