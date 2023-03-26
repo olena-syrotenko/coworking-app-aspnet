@@ -59,7 +59,7 @@ namespace CoworkingApp.Data.Controllers
 
         private bool validateDateRange(DateTime start, DateTime end)
         {
-            return start >= DateTime.Now && start <= end;
+            return start >= DateTime.Today && start <= end;
         }
 
     }
