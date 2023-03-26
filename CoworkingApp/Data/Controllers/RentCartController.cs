@@ -3,7 +3,7 @@ using CoworkingApp.Data.Models;
 using CoworkingApp.Data.Models.Dto;
 using CoworkingApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
+using System;
 
 namespace CoworkingApp.Data.Controllers
 {
@@ -39,7 +39,7 @@ namespace CoworkingApp.Data.Controllers
         [Route("Rent/{roomId}")]
         public IActionResult AddToCart(PlaceDto placeDto, int roomId)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || !validateDateRange(placeDto.rentStart, placeDto.rentEnd))
             {
                 return View("Rent", placeDto);
             }
@@ -55,6 +55,11 @@ namespace CoworkingApp.Data.Controllers
             placeDto.placeId = availablePlace.id;
             _rentCart.AddToCart(placeDto);
             return RedirectToAction("Index");
+        }
+
+        private bool validateDateRange(DateTime start, DateTime end)
+        {
+            return start >= DateTime.Now && start <= end;
         }
 
     }
