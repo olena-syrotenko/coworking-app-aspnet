@@ -51,3 +51,7 @@ p {
     --bs-btn-disabled-border-color: var(--main-orange);
     --bs-gradient: none;
 }
+
+.w-30 {
+    width:30%!important;
+}
