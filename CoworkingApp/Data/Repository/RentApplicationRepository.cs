@@ -1,8 +1,6 @@
 using CoworkingApp.Data.Interfaces;
 using CoworkingApp.Data.Models;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace CoworkingApp.Data.Repository
@@ -36,6 +34,8 @@ namespace CoworkingApp.Data.Repository
                     price = item.price
                 }));
             appDbContent.SaveChanges();
+
+            rentCart.clear();
         }
     }
 }

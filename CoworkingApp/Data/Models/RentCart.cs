@@ -51,5 +51,11 @@ namespace CoworkingApp.Data.Models
 				.ToList();
 		}
 
+		public void clear()
+        {
+			appDbContent.RentCartItem.RemoveRange(appDbContent.RentCartItem.Where(r => r.rentCartId == RentCartId));
+			appDbContent.SaveChanges();
+        }
+
 	}
 }
