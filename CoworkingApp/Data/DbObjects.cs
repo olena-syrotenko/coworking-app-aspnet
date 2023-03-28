@@ -1,6 +1,9 @@
 using CoworkingApp.Data.Models;
+using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CoworkingApp.Data
 {
@@ -9,6 +12,9 @@ namespace CoworkingApp.Data
         private static Dictionary<string, RoomType> roomType;
         private static Dictionary<string, Service> service;
         private static Dictionary<string, Room> room;
+        private static Dictionary<string, IdentityRole> role;
+        private static Dictionary<User, IdentityRole> user;
+        private static Dictionary<string, string> userCred;
 
         public static void Initial(AppDbContent content)
         {
@@ -41,6 +47,76 @@ namespace CoworkingApp.Data
             }
 
             content.SaveChanges();
+        }
+
+        public static async Task InitialAsync(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        {
+            if(!roleManager.Roles.Any())
+            {
+                await Task.WhenAll(Roles.Values.Select(role => roleManager.CreateAsync(role)));
+            }
+
+            if(!userManager.Users.Any())
+            {
+                
+                foreach (var userEl in Users)
+                {
+                    IdentityResult result = await userManager.CreateAsync(userEl.Key, userCred[userEl.Key.Email]);
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(userEl.Key, user[userEl.Key].Name);
+                    }
+                }
+            }
+        }
+
+        public static Dictionary<string, IdentityRole> Roles
+        {
+            get
+            {
+                if (role == null)
+                {
+                    var roleList = new List<IdentityRole>
+                    {
+                        new IdentityRole {Name = "Admin",},
+                        new IdentityRole {Name = "User",},
+                    };
+                    role = new Dictionary<string, IdentityRole>();
+                    roleList.ForEach(el => role.Add(el.Name, el));
+                }
+                return role;
+            }
+        }
+
+        public static Dictionary<User, IdentityRole> Users
+        {
+            get
+            {
+                if (user == null)
+                {
+                    user = new Dictionary<User, IdentityRole>();
+                    userCred = new Dictionary<string, string>();
+
+                    var simpleUser = new User 
+                    {
+                        Email = "testUser@mail.com",
+                        UserName = "Olena",
+                        birthDate = DateTime.Parse("17/03/2003"),
+                    };
+                    user.Add(simpleUser, Roles["User"]);
+                    userCred.Add(simpleUser.Email, "userPass");
+
+                    var admin = new User
+                    {
+                        Email = "testAdmin@mail.com",
+                        UserName = "Admin",
+                        birthDate = DateTime.Parse("01/01/2000"),
+                    };
+                    user.Add(admin, Roles["Admin"]);
+                    userCred.Add(admin.Email, "adminPass");
+                }
+                return user;
+            }
         }
 
         public static Dictionary<string, RoomType> RoomTypes

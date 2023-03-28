@@ -1,0 +1,19 @@
+@model LoginViewModel
+
+<h2>¬х≥д до обл≥кового запису</h2>
+<form method="post" asp-controller="User" asp-action="Login"
+      asp-route-returnUrl="@Model.returnUrl">
+    <div class="mb-3">
+        <label class="form-label" asp-for="email"></label><br />
+        <input class="form-control" asp-for="email" />
+        <span class="text-danger" asp-validation-for="email"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="password"></label><br />
+        <input class="form-control" asp-for="password" />
+        <span class="text-danger" asp-validation-for="password"></span>
+    </div>
+    <div>
+        <input class="btn btn-outline-orange m-1" type="submit" value="”в≥йти" />
+    </div>
+</form>

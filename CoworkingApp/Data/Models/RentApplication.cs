@@ -34,5 +34,9 @@ namespace CoworkingApp.Data.Models
         public DateTime createTime { get; set; }
         [BindNever]
         public List<RentApplicationDetail> rentDetails { get; set; }
+        [BindNever]
+        public int userId { get; set; }
+        [BindNever]
+        public User user { get; set; }
     }
 }

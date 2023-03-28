@@ -1,9 +1,10 @@
 using CoworkingApp.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoworkingApp.Data
 {
-	public class AppDbContent : DbContext
+	public class AppDbContent : IdentityDbContext<User>
 	{
 		public AppDbContent(DbContextOptions<AppDbContent> options) : base(options) { }
 

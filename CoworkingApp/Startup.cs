@@ -5,10 +5,10 @@ using CoworkingApp.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Text.Json.Serialization;
 
 namespace CoworkingApp
 {
@@ -32,12 +32,8 @@ namespace CoworkingApp
 			services.AddMvc(mvcOtions => {
 				mvcOtions.EnableEndpointRouting = false;
 			});
-			services.AddControllers().AddJsonOptions(options =>
-			{
-				options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
-				options.JsonSerializerOptions.WriteIndented = true;
-			});
 			services.AddDbContext<AppDbContent>(options => options.UseMySql(connection, ServerVersion.AutoDetect(connection)));
+			services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AppDbContent>();
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 			services.AddScoped(sp => RentCart.GetCart(sp));
 			services.AddMvc(mvcOtions =>
@@ -55,6 +51,8 @@ namespace CoworkingApp
 			app.UseStatusCodePages();
 			app.UseStaticFiles();
 			app.UseMvcWithDefaultRoute();
+			app.UseAuthentication();
+			app.UseAuthorization();
 			app.UseMvc(routes => {
 				routes.MapRoute(name: "default", template: "{controller-Home}/{action-Index}/{id?}");
 				routes.MapRoute(name: "categoryFilter", template: "Room/{action}/{roomType?}", 
@@ -64,6 +62,8 @@ namespace CoworkingApp
 			using (var scope = app.ApplicationServices.CreateScope())
 			{
 				AppDbContent content = scope.ServiceProvider.GetRequiredService<AppDbContent>();
+				UserManager<User> userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+				UserManager<IdentityRole> roleManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityRole>>();
 				DbObjects.Initial(content);
 			}
 

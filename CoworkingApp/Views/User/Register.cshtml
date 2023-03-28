@@ -1,0 +1,36 @@
+@model RegisterViewModel
+    <div class="d-flex justify-content-center">
+        <div class="d-flex flex-column align-items-center">
+            <h2>Рєстрація нового користувача</h2>
+            <form method="post" asp-controller="User" asp-action="Register">
+                <div class="mb-3">
+                    <label class="form-label" asp-for="email"></label><br />
+                    <input class="form-control" asp-for="email" />
+                    <span class="text-danger" asp-validation-for="email"></span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="name"></label><br />
+                    <input class="form-control" asp-for="name" />
+                    <span class="text-danger" asp-validation-for="name"></span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="birthDate"></label><br />
+                    <input class="form-control" asp-for="birthDate" />
+                    <span class="text-danger" asp-validation-for="birthDate"></span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="password"></label><br />
+                    <input class="form-control" asp-for="password" />
+                    <span class="text-danger" asp-validation-for="password"></span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="passwordConfirm"></label><br />
+                    <input class="form-control" asp-for="passwordConfirm" />
+                    <span class="text-danger" asp-validation-for="passwordConfirm"></span>
+                </div>
+                <div>
+                    <input class="btn btn-outline-orange m-1" type="submit" value="Зареєструватися" />
+                </div>
+            </form>
+        </div>
+    </div>
