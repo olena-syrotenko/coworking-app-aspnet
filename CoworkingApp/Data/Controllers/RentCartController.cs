@@ -1,9 +1,11 @@
 using CoworkingApp.Data.Interfaces;
 using CoworkingApp.Data.Models;
 using CoworkingApp.Data.Models.Dto;
+using CoworkingApp.Data.Utils;
 using CoworkingApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 
 namespace CoworkingApp.Data.Controllers
 {
@@ -24,7 +26,8 @@ namespace CoworkingApp.Data.Controllers
             _rentCart.rentCartItems = items;
             var rentCartViewModel = new RentCartViewModel
             {
-                rentCart = _rentCart
+                rentCart = _rentCart,
+                totalPrice = _rentCart.rentCartItems.Sum(item => CalculationUtil.getTotalForPlace(item.place, item.rentStart, item.rentEnd))
             };
             return View(rentCartViewModel);
         }

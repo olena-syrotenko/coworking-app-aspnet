@@ -1,4 +1,5 @@
 using CoworkingApp.Data.Models.Dto;
+using CoworkingApp.Data.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +18,6 @@ namespace CoworkingApp.Data.Models
 		}
 
 		public string RentCartId { get; set; }
-		public double totalPrice { get; set; }
 		public List<RentCartItem> rentCartItems { get; set; }
 
 		public static RentCart GetCart(IServiceProvider services)
@@ -26,20 +26,18 @@ namespace CoworkingApp.Data.Models
 			var context = services.GetService<AppDbContent>();
 			string shopCartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
 			session.SetString("CartId", shopCartId);
-			return new RentCart(context) { RentCartId = shopCartId, totalPrice = 0 };
+			return new RentCart(context) { RentCartId = shopCartId };
 		}
 
 		public void AddToCart(PlaceDto placeDto)
 		{
-			double rentPrice = placeDto.place.room.price * ((placeDto.rentEnd - placeDto.rentStart).Days + 1);
-			totalPrice += rentPrice;
 			appDbContent.RentCartItem.Add(new RentCartItem
 			{
 				rentCartId = RentCartId,
 				placeId = placeDto.placeId,
 				rentStart = placeDto.rentStart,
 				rentEnd = placeDto.rentEnd,
-				price = rentPrice
+				price = CalculationUtil.getTotalForPlace(placeDto.place, placeDto.rentStart, placeDto.rentEnd)
 			});
 			appDbContent.SaveChanges();
 		}
@@ -53,7 +51,6 @@ namespace CoworkingApp.Data.Models
 
 		public void clear()
         {
-			totalPrice = 0;
 			appDbContent.RentCartItem.RemoveRange(appDbContent.RentCartItem.Where(r => r.rentCartId == RentCartId));
 			appDbContent.SaveChanges();
         }

@@ -1,15 +1,23 @@
 ﻿@model RentCartViewModel
 <div class="container d-flex flex-column w-30 justify-content-center">
     <h3>Rent Cart</h3>
-    @foreach (var el in Model.rentCart.rentCartItems)
+    @if (Model.rentCart.rentCartItems.Count() > 0)
     {
-    <div class="alert-warning mt-3">
-        <b>Робоче місце:</b> @el.place.code<br />
-        <b>Кімната:</b> @el.place.room.roomType.name @el.place.room.name<br />
-        <b>Сума орендної плати:</b> @el.price.ToString("c")<br />
-        <b>Період оренди:</b> @el.rentStart.ToString("dd/MM/yyyy") -  @el.rentEnd.ToString("dd/MM/yyyy")
-    </div>
+        @foreach (var el in Model.rentCart.rentCartItems)
+        {
+            <div class="alert-warning mt-3">
+                <b>Робоче місце:</b> @el.place.code<br />
+                <b>Кімната:</b> @el.place.room.roomType.name @el.place.room.name<br />
+                <b>Сума орендної плати:</b> @el.price.ToString("c")<br />
+                <b>Період оренди:</b> @el.rentStart.ToString("dd/MM/yyyy") -  @el.rentEnd.ToString("dd/MM/yyyy")
+            </div>
+        }
+        <hr />
+        <b>Загальна сума орендної плати:</b> @Model.totalPrice.ToString("c")<br />
+        <a class="btn btn-outline-orange m-5" asp-controller="RentApplication" asp-action="Checkout">Сплатити</a>
     }
-    <hr />
-    <a class="btn btn-outline-orange m-5" asp-controller="RentApplication" asp-action="Checkout">Сплатити</a>
+    else
+    {
+        <p>Ваша корзина порожня</p>
+    }
 </div>
