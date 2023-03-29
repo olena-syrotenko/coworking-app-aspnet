@@ -28,7 +28,7 @@ namespace CoworkingApp.Data.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.email, UserName = model.name, birthDate = model.birthDate };
+                User user = new User { Email = model.email, UserName = model.email, name = model.name, birthDate = model.birthDate };
           
                 var result = await _userManager.CreateAsync(user, model.password);
                 if (result.Succeeded)

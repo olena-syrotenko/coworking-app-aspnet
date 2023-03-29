@@ -26,7 +26,7 @@ namespace CoworkingApp.ViewModels
         public string password { get; set; }
 
         [Required]
-        [Compare("Password", ErrorMessage = "Паролі не збігаються")]
+        [Compare("password", ErrorMessage = "Паролі не збігаються")]
         [DataType(DataType.Password)]
         [Display(Name = "Підтвердіть пароль")]
         public string passwordConfirm { get; set; }

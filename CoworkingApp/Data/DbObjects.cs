@@ -103,7 +103,8 @@ namespace CoworkingApp.Data
                     var simpleUser = new User 
                     {
                         Email = "testUser@mail.com",
-                        UserName = "Olena",
+                        UserName = "testUser@mail.com",
+                        name = "Olena",
                         birthDate = DateTime.Parse("17/03/2003"),
                     };
                     user.Add(simpleUser, Roles["User"]);
@@ -112,7 +113,8 @@ namespace CoworkingApp.Data
                     var admin = new User
                     {
                         Email = "testAdmin@mail.com",
-                        UserName = "Admin",
+                        UserName = "testAdmin@mail.com",
+                        name = "Admin",
                         birthDate = DateTime.Parse("01/01/2000"),
                     };
                     user.Add(admin, Roles["Admin"]);
