@@ -35,6 +35,14 @@ namespace CoworkingApp
 			});
 			services.AddDbContext<AppDbContent>(options => options.UseMySql(connection, ServerVersion.AutoDetect(connection)), ServiceLifetime.Transient);
 			services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AppDbContent>();
+			services.Configure<IdentityOptions>(options =>
+			{
+				options.Password.RequireDigit = false;
+				options.Password.RequireLowercase = false;
+				options.Password.RequireNonAlphanumeric = false;
+				options.Password.RequireUppercase = false;
+				options.User.RequireUniqueEmail = true;
+			});
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 			services.AddScoped(sp => RentCart.GetCart(sp));
 			services.AddMvc(mvcOtions =>
