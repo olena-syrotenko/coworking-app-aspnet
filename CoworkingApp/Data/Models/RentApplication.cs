@@ -35,7 +35,7 @@ namespace CoworkingApp.Data.Models
         [BindNever]
         public List<RentApplicationDetail> rentDetails { get; set; }
         [BindNever]
-        public int userId { get; set; }
+        public string userId { get; set; }
         [BindNever]
         public User user { get; set; }
     }

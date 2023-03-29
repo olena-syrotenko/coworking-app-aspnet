@@ -3,14 +3,16 @@ using System;
 using CoworkingApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CoworkingApp.Migrations
 {
     [DbContext(typeof(AppDbContent))]
-    partial class AppDbContentModelSnapshot : ModelSnapshot
+    [Migration("20230329185639_Users")]
+    partial class Users
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,12 +70,15 @@ namespace CoworkingApp.Migrations
                     b.Property<double>("totalPrice")
                         .HasColumnType("double");
 
-                    b.Property<string>("userId")
+                    b.Property<int>("userId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("userId1")
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("id");
 
-                    b.HasIndex("userId");
+                    b.HasIndex("userId1");
 
                     b.ToTable("RentApplication");
                 });
@@ -426,7 +431,7 @@ namespace CoworkingApp.Migrations
                 {
                     b.HasOne("CoworkingApp.Data.Models.User", "user")
                         .WithMany()
-                        .HasForeignKey("userId");
+                        .HasForeignKey("userId1");
 
                     b.Navigation("user");
                 });

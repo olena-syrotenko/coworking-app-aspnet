@@ -63,8 +63,9 @@ namespace CoworkingApp
 			{
 				AppDbContent content = scope.ServiceProvider.GetRequiredService<AppDbContent>();
 				UserManager<User> userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
-				UserManager<IdentityRole> roleManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityRole>>();
+				RoleManager<IdentityRole> roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 				DbObjects.Initial(content);
+                _ = DbObjects.InitialAsync(userManager, roleManager);
 			}
 
 		}
