@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
 
 namespace CoworkingApp
 {
@@ -32,7 +33,7 @@ namespace CoworkingApp
 			services.AddMvc(mvcOtions => {
 				mvcOtions.EnableEndpointRouting = false;
 			});
-			services.AddDbContext<AppDbContent>(options => options.UseMySql(connection, ServerVersion.AutoDetect(connection)));
+			services.AddDbContext<AppDbContent>(options => options.UseMySql(connection, ServerVersion.AutoDetect(connection)), ServiceLifetime.Transient);
 			services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AppDbContent>();
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 			services.AddScoped(sp => RentCart.GetCart(sp));
@@ -65,7 +66,8 @@ namespace CoworkingApp
 				UserManager<User> userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 				RoleManager<IdentityRole> roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 				DbObjects.Initial(content);
-                _ = DbObjects.InitialAsync(userManager, roleManager);
+				var task = Task.Run(async () => await DbObjects.InitialAsync(userManager, roleManager));
+				task.Wait();
 			}
 
 		}

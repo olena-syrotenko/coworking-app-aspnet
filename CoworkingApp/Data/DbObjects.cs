@@ -53,18 +53,21 @@ namespace CoworkingApp.Data
         {
             if(!roleManager.Roles.Any())
             {
-                await Task.WhenAll(Roles.Values.Select(role => roleManager.CreateAsync(role)));
+                foreach (var roleEl in Roles.Values)
+                {
+                    await roleManager.CreateAsync(roleEl);
+                }
             }
 
             if(!userManager.Users.Any())
             {
                 
-                foreach (var userEl in Users)
+                foreach (var userEl in Users.Keys)
                 {
-                    IdentityResult result = await userManager.CreateAsync(userEl.Key, userCred[userEl.Key.Email]);
+                    IdentityResult result = await userManager.CreateAsync(userEl, userCred[userEl.Email]);
                     if (result.Succeeded)
                     {
-                        await userManager.AddToRoleAsync(userEl.Key, user[userEl.Key].Name);
+                        await userManager.AddToRoleAsync(userEl, Users[userEl].Name);
                     }
                 }
             }
@@ -104,7 +107,7 @@ namespace CoworkingApp.Data
                         birthDate = DateTime.Parse("17/03/2003"),
                     };
                     user.Add(simpleUser, Roles["User"]);
-                    userCred.Add(simpleUser.Email, "userPass");
+                    userCred.Add(simpleUser.Email, "userPass1!");
 
                     var admin = new User
                     {
@@ -113,7 +116,7 @@ namespace CoworkingApp.Data
                         birthDate = DateTime.Parse("01/01/2000"),
                     };
                     user.Add(admin, Roles["Admin"]);
-                    userCred.Add(admin.Email, "adminPass");
+                    userCred.Add(admin.Email, "adminPass1!");
                 }
                 return user;
             }
