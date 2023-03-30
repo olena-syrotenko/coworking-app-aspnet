@@ -1,19 +1,26 @@
 ﻿@model LoginViewModel
-
-<h2>Вхід до облікового запису</h2>
-<form method="post" asp-controller="User" asp-action="Login"
-      asp-route-returnUrl="@Model.returnUrl">
-    <div class="mb-3">
-        <label class="form-label" asp-for="email"></label><br />
-        <input class="form-control" asp-for="email" />
-        <span class="text-danger" asp-validation-for="email"></span>
+    <div class="d-flex justify-content-center">
+        <div class="d-flex flex-column align-items-center">
+            <h2>Вхід до облікового запису</h2>
+            <form method="post" asp-controller="User" asp-action="Login"
+                  asp-route-returnUrl="@Model.returnUrl">
+                <div class="mb-3">
+                    <label class="form-label" asp-for="email"></label><br />
+                    <input class="form-control" asp-for="email" />
+                    <span class="text-danger" asp-validation-for="email"></span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="password"></label><br />
+                    <input class="form-control" asp-for="password" />
+                    <span class="text-danger" asp-validation-for="password"></span>
+                </div>
+                <div>
+                    <input class="btn btn-outline-orange m-1" type="submit" value="Увійти" />
+                </div>
+            </form>
+            <div>
+                <p>Не маєте акаунту?</p>
+                <a class="btn btn-outline-orange" asp-controller="User" asp-action="Register">Зареєструватися</a>
+            </div>
+        </div>
     </div>
-    <div class="mb-3">
-        <label class="form-label" asp-for="password"></label><br />
-        <input class="form-control" asp-for="password" />
-        <span class="text-danger" asp-validation-for="password"></span>
-    </div>
-    <div>
-        <input class="btn btn-outline-orange m-1" type="submit" value="Увійти" />
-    </div>
-</form>

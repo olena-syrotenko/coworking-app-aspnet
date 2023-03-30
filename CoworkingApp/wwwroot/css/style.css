@@ -55,3 +55,41 @@ p {
 .w-30 {
     width:30%!important;
 }
+
+.nav-custom {
+    display: flex;
+    width: 100%;
+    position: relative;
+    flex-direction: row;
+}
+
+.nav-custom-block {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+}
+
+.nav-custom-absolute {
+    display: flex;
+    position: absolute;
+    width: 30%;
+    flex-direction: row;
+    top: 7px;
+    right: 10px;
+    justify-content: flex-end;
+}
+
+.nav-item-custom {
+    margin-inline: 20px;
+    list-style-type: none;
+}
+
+.nav-button-custom {
+    width: 75px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

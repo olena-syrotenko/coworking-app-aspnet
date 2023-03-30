@@ -1,6 +1,6 @@
 ﻿@model RentCartViewModel
 <div class="container d-flex flex-column w-30 justify-content-center">
-    <h3>Rent Cart</h3>
+    <h3 class="text-center">Rent Cart</h3>
     @if (Model.rentCart.rentCartItems.Count() > 0)
     {
         @foreach (var el in Model.rentCart.rentCartItems)
@@ -18,6 +18,6 @@
     }
     else
     {
-        <p>Ваша корзина порожня</p>
+        <p class="text-center">Ваша корзина порожня</p>
     }
 </div>

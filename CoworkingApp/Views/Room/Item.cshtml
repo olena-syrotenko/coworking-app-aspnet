@@ -14,13 +14,15 @@
             <ul>
                 @{ foreach (var service in @Model.services)
                     {
-                        <li>@service.name</li>
-                     } }
+        <li>@service.name</li> } }
             </ul>
         </p>
-        <p>
-            <a class="btn btn-outline-orange" asp-controller="RentCart" asp-action="AddToCart" asp-route-roomId="@Model.id">Орендувати робоче місце</a>
-        </p>
+        @if (User.IsInRole("User"))
+        {
+            <p>
+                <a class="btn btn-outline-orange" asp-controller="RentCart" asp-action="AddToCart" asp-route-roomId="@Model.id">Орендувати робоче місце</a>
+            </p>
+        }
     </div>
     <div class="w-50">
         <img class="img-thumbnail" src="@Model.imageUrl" alt="@Model.name" />

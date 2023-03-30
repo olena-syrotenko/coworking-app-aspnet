@@ -1,10 +1,11 @@
 using CoworkingApp.Data.Interfaces;
 using CoworkingApp.Data.Models;
-using CoworkingApp.Data.Models.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoworkingApp.Data.Controllers
 {
+    [Authorize]
     public class RentApplicationController : Controller
     {
         private readonly IRentApplication _rentApplications;

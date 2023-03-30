@@ -3,12 +3,15 @@ using CoworkingApp.Data.Models;
 using CoworkingApp.Data.Models.Dto;
 using CoworkingApp.Data.Utils;
 using CoworkingApp.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 
 namespace CoworkingApp.Data.Controllers
 {
+
+    [Authorize]
     public class RentCartController : Controller
     {
         private readonly IPlace _placeRepository;

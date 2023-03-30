@@ -2,6 +2,7 @@ using CoworkingApp.Data;
 using CoworkingApp.Data.Interfaces;
 using CoworkingApp.Data.Models;
 using CoworkingApp.Data.Repository;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -43,6 +44,16 @@ namespace CoworkingApp
 				options.Password.RequireUppercase = false;
 				options.User.RequireUniqueEmail = true;
 			});
+			services.AddAuthentication(options =>
+			{
+				options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+			})
+			.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+			{
+				options.Cookie.HttpOnly = true;
+				options.LoginPath = "/User/Login";
+				options.SlidingExpiration = true;
+			});
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 			services.AddScoped(sp => RentCart.GetCart(sp));
 			services.AddMvc(mvcOtions =>
@@ -57,11 +68,11 @@ namespace CoworkingApp
 		{
 			app.UseSession();
 			app.UseDeveloperExceptionPage();
+			app.UseAuthentication();
+			app.UseAuthorization();
 			app.UseStatusCodePages();
 			app.UseStaticFiles();
 			app.UseMvcWithDefaultRoute();
-			app.UseAuthentication();
-			app.UseAuthorization();
 			app.UseMvc(routes => {
 				routes.MapRoute(name: "default", template: "{controller-Home}/{action-Index}/{id?}");
 				routes.MapRoute(name: "categoryFilter", template: "Room/{action}/{roomType?}", 

@@ -10,24 +10,45 @@
 </head>
 <body>
     <header class="d-flex justify-content-center py-3">
-        <ul class="nav nav-pills">
-            <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Home</a></li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Rooms
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                    <li class="dropdown-item"><a href="/Room/List" class="nav-link">All Rooms</a></li>
-                    <li class="dropdown-item"><a href="/Room/List/open-space" class="nav-link">Open Space</a></li>
-                    <li class="dropdown-item"><a href="/Room/List/lounge-zone" class="nav-link">Lounge</a></li>
-                    <li class="dropdown-item"><a href="/Room/List/meeting-room" class="nav-link">Meeting</a></li>
-                    <li class="dropdown-item"><a href="/Room/List/skype-room" class="nav-link">Skype</a></li>
-                    <li class="dropdown-item"><a href="/Room/List/private-office" class="nav-link">Office</a></li>
-                    <li class="dropdown-item"><a href="/Room/List/business-suite" class="nav-link">Business Space</a></li>
-                </ul>
-            </li>
-            <li class="nav-item"><a href="/RentCart/" class="nav-link">My Cart</a></li>
-        </ul>
+        <div class="nav-custom">
+            <ul class="nav-custom-block nav-pills">
+                <li class="nav-item-custom"><a href="/" class="nav-link active nav-button-custom" aria-current="page">Home</a></li>
+                <li class="nav-item-custom dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Rooms
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                        <li class="dropdown-item"><a href="/Room/List" class="nav-link">All Rooms</a></li>
+                        <li class="dropdown-item"><a href="/Room/List/open-space" class="nav-link">Open Space</a></li>
+                        <li class="dropdown-item"><a href="/Room/List/lounge-zone" class="nav-link">Lounge</a></li>
+                        <li class="dropdown-item"><a href="/Room/List/meeting-room" class="nav-link">Meeting</a></li>
+                        <li class="dropdown-item"><a href="/Room/List/skype-room" class="nav-link">Skype</a></li>
+                        <li class="dropdown-item"><a href="/Room/List/private-office" class="nav-link">Office</a></li>
+                        <li class="dropdown-item"><a href="/Room/List/business-suite" class="nav-link">Business Space</a></li>
+                    </ul>
+                </li>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+                {
+        <li class="nav-item-custom"><a href="/RentCart/" class="nav-link">My Cart</a></li>}
+            </ul>
+            <ul class="nav-custom-absolute nav-pills">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item-custom">
+                        <i class="fa-solid fa-circle-user"></i><span> @User.Identity.Name</span>
+                    </li>
+                    <li class="nav-item-custom">
+                        <form method="post" asp-controller="User" asp-action="Logout">
+                            <input class="nav-link" type="submit" value="Вийти" />
+                        </form>
+                    </li>
+                 }
+                 else
+                 {
+                    <li class="nav-item"><a class="nav-link" href="/User/Login">Увійти</a></li>
+                 }
+            </ul>
+        </div>
     </header>
         <div class="container">
             @RenderBody()

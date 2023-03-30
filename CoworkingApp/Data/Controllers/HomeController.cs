@@ -1,10 +1,11 @@
 using CoworkingApp.Data.Interfaces;
 using CoworkingApp.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 
 namespace CoworkingApp.Data.Controllers
 {
+	[AllowAnonymous]
 	public class HomeController : Controller
 	{
 		private readonly IRoom _roomRepository;
