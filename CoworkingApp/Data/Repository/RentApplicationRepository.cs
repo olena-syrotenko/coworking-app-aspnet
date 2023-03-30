@@ -5,6 +5,8 @@ using System;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace CoworkingApp.Data.Repository
 {
@@ -20,6 +22,9 @@ namespace CoworkingApp.Data.Repository
             this.rentCart = rentCart;
             this.httpContextAccessor = httpContextAccessor;
         }
+
+        public IEnumerable<RentApplication> AllRentApplications => appDbContent.RentApplication.Include(rp => rp.user)
+            .Include(rp => rp.rentDetails).ThenInclude(rd => rd.place).ThenInclude(p => p.room).ThenInclude(rm => rm.roomType);
 
         public void createRentApplication(RentApplication rentApplication)
         {
@@ -42,6 +47,18 @@ namespace CoworkingApp.Data.Repository
             appDbContent.SaveChanges();
 
             rentCart.clear();
+        }
+
+        public RentApplication getById(int id)
+        {
+            return appDbContent.RentApplication.Include(rp => rp.user).Include(rp => rp.rentDetails).ThenInclude(rd => rd.place)
+                .ThenInclude(p => p.room).ThenInclude(rm => rm.roomType).FirstOrDefault(rp => rp.id == id); 
+        }
+
+        public IEnumerable<RentApplication> getByUserId(string userId)
+        {
+            return appDbContent.RentApplication.Include(rp => rp.user).Include(rp => rp.rentDetails).ThenInclude(rd => rd.place)
+                .ThenInclude(p => p.room).ThenInclude(rm => rm.roomType).Where(rp => rp.userId == userId);
         }
     }
 }

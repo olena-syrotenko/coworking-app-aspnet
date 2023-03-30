@@ -1,0 +1,29 @@
+﻿@model RentApplication
+<h2 class="text-center">Заявка на оренду №@Model.id</h2>
+<div class="line"></div>
+<div class="d-flex flex-row justify-content-center align-items-center">
+    <div class="w-50">
+        <h5>Створено</h5>
+        <p>Дата створення: @Model.createTime.ToString("dd/MM/yyyy")</p>
+        <p>Користувач: @Model.user.Email</p>
+        <br/>
+        <h5>Орендар</h5>
+        <p>Ім'я: @Model.firstName @Model.lastName</p>
+        <p>Номер телефону: @Model.phone</p>
+        <p>Email: @Model.email</p>
+    </div>
+    <div class="w-50">
+        <h5>Робочі місця</h5>
+        @foreach (var el in Model.rentDetails)
+        {
+            <div class="alert-warning mt-3">
+                <p>Робоче місце: @el.place.code</p>
+                <p>Кімната: @el.place.room.roomType.name @el.place.room.name</p>
+                <p>Сума орендної плати: @el.price.ToString("c")</p>
+                <p>Період оренди:  @el.rentStart.ToString("dd/MM/yyyy") -  @el.rentEnd.ToString("dd/MM/yyyy")</p>
+            </div>
+        }
+        <hr />
+        <b>Загальна сума орендної плати:</b> @Model.totalPrice.ToString("c")<br />
+    </div>
+</div>
