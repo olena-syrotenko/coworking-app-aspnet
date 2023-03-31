@@ -140,7 +140,7 @@ namespace CoworkingApp.Data
                     {
                         new Status {name = "Нова",},
                         new Status {name = "Підтверджено",},
-                        new Status {name = "Вілхилено",},
+                        new Status {name = "Відхилено",},
                         new Status {name = "Скасовано",}
                     };
                     status = new Dictionary<string, Status>();
