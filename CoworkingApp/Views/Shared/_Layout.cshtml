@@ -33,7 +33,7 @@
                     {
                         <li class="nav-item-custom"><a href="/RentCart/" class="nav-link">My Cart</a></li>                       
                     }
-                    <li class="nav-item-custom"><a href = "@Url.Action("List", "RentApplication")@(User.IsInRole("User") ? $"/{User.FindFirst(ClaimTypes.NameIdentifier)?.Value}" : "")" class="nav-link">Rent Applications</a></li>
+                    <li class="nav-item-custom"><a href = "/RentApplication/List" class="nav-link">Rent Applications</a></li>
                 }
             </ul>
             <ul class="nav-custom-absolute nav-pills">

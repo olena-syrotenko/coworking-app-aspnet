@@ -3,8 +3,6 @@ using CoworkingApp.Data.Models;
 using CoworkingApp.Data.Utils;
 using System;
 using System.Linq;
-using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,23 +12,21 @@ namespace CoworkingApp.Data.Repository
     {
         private readonly RentCart rentCart;
         private readonly AppDbContent appDbContent;
-        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public RentApplicationRepository(AppDbContent appDbContent, RentCart rentCart, IHttpContextAccessor httpContextAccessor)
+        public RentApplicationRepository(AppDbContent appDbContent, RentCart rentCart)
         {
             this.appDbContent = appDbContent;
             this.rentCart = rentCart;
-            this.httpContextAccessor = httpContextAccessor;
         }
 
-        public IEnumerable<RentApplication> AllRentApplications => appDbContent.RentApplication.Include(rp => rp.user)
+        public IEnumerable<RentApplication> AllRentApplications => appDbContent.RentApplication.Include(rp => rp.user).Include(rp => rp.status)
             .Include(rp => rp.rentDetails).ThenInclude(rd => rd.place).ThenInclude(p => p.room).ThenInclude(rm => rm.roomType);
 
         public void createRentApplication(RentApplication rentApplication)
         {
             rentApplication.createTime = DateTime.Now;
             rentApplication.totalPrice = rentCart.getRentItems().Sum(item => CalculationUtil.getTotalForPlace(item.place, item.rentStart, item.rentEnd));
-            rentApplication.userId = httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            rentApplication.statusId = appDbContent.Status.Where(s => s.name.Equals("Нова")).Select(s => s.id).FirstOrDefault();
 
             appDbContent.RentApplication.Add(rentApplication);
             appDbContent.SaveChanges();
@@ -51,14 +47,20 @@ namespace CoworkingApp.Data.Repository
 
         public RentApplication getById(int id)
         {
-            return appDbContent.RentApplication.Include(rp => rp.user).Include(rp => rp.rentDetails).ThenInclude(rd => rd.place)
+            return appDbContent.RentApplication.Include(rp => rp.user).Include(rp => rp.status).Include(rp => rp.rentDetails).ThenInclude(rd => rd.place)
                 .ThenInclude(p => p.room).ThenInclude(rm => rm.roomType).FirstOrDefault(rp => rp.id == id); 
         }
 
         public IEnumerable<RentApplication> getByUserId(string userId)
         {
-            return appDbContent.RentApplication.Include(rp => rp.user).Include(rp => rp.rentDetails).ThenInclude(rd => rd.place)
+            return appDbContent.RentApplication.Include(rp => rp.user).Include(rp => rp.status).Include(rp => rp.rentDetails).ThenInclude(rd => rd.place)
                 .ThenInclude(p => p.room).ThenInclude(rm => rm.roomType).Where(rp => rp.userId == userId);
+        }
+
+        public void updateRentApplication(RentApplication rentApplication, string newStatus)
+        {
+            rentApplication.statusId = appDbContent.Status.Where(s => s.name.Equals(newStatus)).Select(s => s.id).FirstOrDefault();
+            appDbContent.SaveChanges();
         }
     }
 }

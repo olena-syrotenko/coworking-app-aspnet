@@ -38,5 +38,9 @@ namespace CoworkingApp.Data.Models
         public string userId { get; set; }
         [BindNever]
         public User user { get; set; }
+        [BindNever]
+        public int statusId { get; set; }
+        [BindNever]
+        public Status status { get; set; }
     }
 }

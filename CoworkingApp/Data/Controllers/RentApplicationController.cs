@@ -2,9 +2,11 @@ using CoworkingApp.Data.Interfaces;
 using CoworkingApp.Data.Models;
 using CoworkingApp.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 
 namespace CoworkingApp.Data.Controllers
 {
@@ -12,11 +14,14 @@ namespace CoworkingApp.Data.Controllers
     public class RentApplicationController : Controller
     {
         private readonly IRentApplication _rentApplications;
-        private readonly RentCart _rentCart;
-        public RentApplicationController(IRentApplication rentApplications, RentCart rentCart)
+
+		private readonly IHttpContextAccessor _httpContextAccessor;
+		private readonly RentCart _rentCart;
+        public RentApplicationController(IRentApplication rentApplications, RentCart rentCart, IHttpContextAccessor httpContextAccessor)
         {
             _rentApplications = rentApplications;
             _rentCart = rentCart;
+			_httpContextAccessor = httpContextAccessor;
         }
 
 		[Route("RentApplication/Checkout")]
@@ -36,23 +41,24 @@ namespace CoworkingApp.Data.Controllers
             }
             if (ModelState.IsValid)
             {
-                _rentApplications.createRentApplication(rentApplication);
+				rentApplication.userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+				_rentApplications.createRentApplication(rentApplication);
                 return RedirectToAction("Message", "Home", new { message = "Заявку на оренду відправлено на обробку!" });
             }
             return View(rentApplication);
         }
 
 		[Route("RentApplication/List")]
-		[Route("RentApplication/List/{userId}")]
-		public ViewResult List(string userId)
+		public ViewResult List()
 		{
 			IEnumerable<RentApplication> rentApplications = null;
-			if (string.IsNullOrEmpty(userId))
+			if (_httpContextAccessor.HttpContext.User.IsInRole("Admin"))
 			{
 				rentApplications = _rentApplications.AllRentApplications.OrderByDescending(rp => rp.id);
 			}
 			else
 			{
+				var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 				rentApplications = _rentApplications.getByUserId(userId).OrderByDescending(rp => rp.id);
 			}
 
@@ -74,6 +80,23 @@ namespace CoworkingApp.Data.Controllers
 			}
 			ViewBag.Title = "Заявка №" + rentApplication.id;
 			return View(rentApplication);
+		}
+
+		[HttpPost]
+		[Route("RentApplication/{applId}/update")]
+		public IActionResult Update(int applId, string newStatus)
+		{
+			RentApplication rentApplication = _rentApplications.getById(applId);
+			if (rentApplication == null)
+			{
+				return NotFound("No such rent application");
+			}
+			if (newStatus == null || newStatus.Length == 0)
+			{
+				return NotFound("No such status");
+			}
+			_rentApplications.updateRentApplication(rentApplication, newStatus);
+			return RedirectToAction("List", "RentApplication");
 		}
 	}
 }

@@ -15,10 +15,16 @@ namespace CoworkingApp.Data
         private static Dictionary<string, IdentityRole> role;
         private static Dictionary<User, IdentityRole> user;
         private static Dictionary<string, string> userCred;
+        private static Dictionary<string, Status> status;
 
         public static void Initial(AppDbContent content)
         {
-            if(!content.RoomType.Any())
+            if (!content.Status.Any())
+            {
+                content.Status.AddRange(Statuses.Select(r => r.Value));
+            }
+
+            if (!content.RoomType.Any())
             {
                 content.RoomType.AddRange(RoomTypes.Select(rt => rt.Value));
             }
@@ -121,6 +127,26 @@ namespace CoworkingApp.Data
                     userCred.Add(admin.Email, "adminPass1!");
                 }
                 return user;
+            }
+        }
+
+        public static Dictionary<string, Status> Statuses
+        {
+            get
+            {
+                if (status == null)
+                {
+                    var statusList = new List<Status>
+                    {
+                        new Status {name = "Нова",},
+                        new Status {name = "Підтверджено",},
+                        new Status {name = "Вілхилено",},
+                        new Status {name = "Скасовано",}
+                    };
+                    status = new Dictionary<string, Status>();
+                    statusList.ForEach(el => status.Add(el.name, el));
+                }
+                return status;
             }
         }
 

@@ -21,6 +21,8 @@ namespace CoworkingApp.Data
 		public DbSet<RentApplication> RentApplication { get; set; }
 		
 		public DbSet<RentApplicationDetail> RentApplicationDetail { get; set; }
+		
+		public DbSet<Status> Status { get; set; }
 
 	}
 }
