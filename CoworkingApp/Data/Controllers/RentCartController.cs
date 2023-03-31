@@ -1,6 +1,5 @@
 using CoworkingApp.Data.Interfaces;
 using CoworkingApp.Data.Models;
-using CoworkingApp.Data.Models.Dto;
 using CoworkingApp.Data.Utils;
 using CoworkingApp.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -43,7 +42,7 @@ namespace CoworkingApp.Data.Controllers
 
         [HttpPost]
         [Route("Rent/{roomId}")]
-        public IActionResult AddToCart(PlaceDto placeDto, int roomId)
+        public IActionResult AddToCart(PlaceViewModel placeDto, int roomId)
         {
             if (!ModelState.IsValid || !validateDateRange(placeDto.rentStart, placeDto.rentEnd))
             {

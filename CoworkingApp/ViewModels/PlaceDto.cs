@@ -1,10 +1,11 @@
+using CoworkingApp.Data.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace CoworkingApp.Data.Models.Dto
+namespace CoworkingApp.ViewModels
 {
-    public class PlaceDto
+    public class PlaceViewModel
     {
         [BindNever]
         public int placeId { get; set; }

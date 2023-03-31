@@ -1,5 +1,5 @@
-using CoworkingApp.Data.Models.Dto;
 using CoworkingApp.Data.Utils;
+using CoworkingApp.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,7 +29,7 @@ namespace CoworkingApp.Data.Models
 			return new RentCart(context) { RentCartId = shopCartId };
 		}
 
-		public void AddToCart(PlaceDto placeDto)
+		public void AddToCart(PlaceViewModel placeDto)
 		{
 			appDbContent.RentCartItem.Add(new RentCartItem
 			{
