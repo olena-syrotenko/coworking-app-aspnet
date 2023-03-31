@@ -130,8 +130,6 @@ namespace CoworkingApp.Data.Mocks
 			}
 		}
 
-		public IEnumerable<Room> PopularRooms { get; }
-
         public IEnumerable<Room> FavouriteRooms { get; }
 
         public Room getById(int id)

@@ -10,43 +10,42 @@ using System.Security.Claims;
 
 namespace CoworkingApp.Data.Controllers
 {
-    [Authorize]
-    public class RentApplicationController : Controller
-    {
-        private readonly IRentApplication _rentApplications;
-
+	[Authorize]
+	public class RentApplicationController : Controller
+	{
+		private readonly IRentApplication _rentApplications;
 		private readonly IHttpContextAccessor _httpContextAccessor;
 		private readonly RentCart _rentCart;
-        public RentApplicationController(IRentApplication rentApplications, RentCart rentCart, IHttpContextAccessor httpContextAccessor)
-        {
-            _rentApplications = rentApplications;
-            _rentCart = rentCart;
+		public RentApplicationController(IRentApplication rentApplications, RentCart rentCart, IHttpContextAccessor httpContextAccessor)
+		{
+			_rentApplications = rentApplications;
+			_rentCart = rentCart;
 			_httpContextAccessor = httpContextAccessor;
-        }
+		}
 
 		[Route("RentApplication/Checkout")]
 		public IActionResult Checkout()
-        {
-            return View();
-        }
+		{
+			return View();
+		}
 
-        [HttpPost]
+		[HttpPost]
 		[Route("RentApplication/Checkout")]
 		public IActionResult Checkout(RentApplication rentApplication)
-        {
-            _rentCart.rentCartItems = _rentCart.getRentItems();
-            if (_rentCart.rentCartItems.Count == 0)
-            {
-                ModelState.AddModelError("", "Ви повинні додати робочі місця!");
-            }
-            if (ModelState.IsValid)
-            {
+		{
+			_rentCart.rentCartItems = _rentCart.getRentItems();
+			if (_rentCart.rentCartItems.Count == 0)
+			{
+				ModelState.AddModelError("", "Ви повинні додати робочі місця!");
+			}
+			if (ModelState.IsValid)
+			{
 				rentApplication.userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 				_rentApplications.createRentApplication(rentApplication);
-                return RedirectToAction("Message", "Home", new { message = "Заявку на оренду відправлено на обробку!" });
-            }
-            return View(rentApplication);
-        }
+				return RedirectToAction("Message", "Home", new { message = "Заявку на оренду відправлено на обробку!" });
+			}
+			return View(rentApplication);
+		}
 
 		[Route("RentApplication/List")]
 		public ViewResult List()

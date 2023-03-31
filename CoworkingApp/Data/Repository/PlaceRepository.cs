@@ -35,7 +35,6 @@ namespace CoworkingApp.Data.Repository
                 .Where(p => p.roomId == roomId && !(placesInRentApplications.Contains(p.id) || placesInRentCarts.Contains(p.id)))
                 .Include(p => p.room)
                 .FirstOrDefault();
-            return null;
         }
 
         public Place getById(int id) => appDbContent.Place.FirstOrDefault(p => p.id == id);
