@@ -11,6 +11,7 @@ namespace CoworkingApp.ViewModels
         public string email { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
         [Display(Name = "Дата народження")]
         public DateTime birthDate { get; set; }
 

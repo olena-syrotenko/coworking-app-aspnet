@@ -3,6 +3,7 @@ using CoworkingApp.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace CoworkingApp.Data.Controllers
@@ -27,7 +28,7 @@ namespace CoworkingApp.Data.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && validateAge(model.birthDate))
             {
                 User user = new User { Email = model.email, UserName = model.email, name = model.name, birthDate = model.birthDate };
           
@@ -89,6 +90,11 @@ namespace CoworkingApp.Data.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        private bool validateAge(DateTime birthDay)
+        {
+            return (DateTime.Today - birthDay).TotalDays / 365.25 >= 18;
         }
     }
 }
