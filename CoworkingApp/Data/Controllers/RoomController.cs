@@ -1,5 +1,6 @@
 using CoworkingApp.Data.Interfaces;
 using CoworkingApp.Data.Models;
+using CoworkingApp.Data.Utils;
 using CoworkingApp.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,7 @@ namespace CoworkingApp.Data.Controllers
 
 		[Route("Room/List")]
 		[Route("Room/List/{roomType}")]
-		public ViewResult List(string roomType)
+		public ViewResult List(string roomType, string sortType = "")
 		{
 			IEnumerable<Room> rooms = null;
 			string currType = "";
@@ -35,10 +36,19 @@ namespace CoworkingApp.Data.Controllers
 			else
 			{
 				currType = roomType.Replace('-', ' ').ToLower();
-				rooms = _rooms.getByRoomType(currType);
+				rooms = _rooms.getByRoomType(currType).OrderBy(i => i.id);
 				currType = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(currType);
 			}
-			
+
+			if (sortType.ToLower().Equals(Constants.ASC))
+            {
+				rooms = rooms.OrderBy(r => r.price);
+            } 
+			else if (sortType.ToLower().Equals(Constants.DESC))
+            {
+				rooms = rooms.OrderByDescending(r => r.price);
+			}
+
 			RoomListViewModels roomListViewModels = new RoomListViewModels()
 			{
 				currentType = currType,

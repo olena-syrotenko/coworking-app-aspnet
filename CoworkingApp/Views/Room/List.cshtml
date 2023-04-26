@@ -1,5 +1,19 @@
 ﻿@model RoomListViewModels
+@{
+    string currentUrl = Context.Request.Path;
+}
+
 <h2 class="text-center">@Model.currentType</h2>
+<div class="dropdown">
+    <button class="btn nav-pills dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        Відсортувати
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="@currentUrl">За замовчуванням</a>
+        <a class="dropdown-item" href="@currentUrl?sortType=asc">За зростанням ціни</a>
+        <a class="dropdown-item" href="@currentUrl?sortType=desc">За спаданням ціни</a>
+    </div>
+</div>
 <div class="row mt-5 mb-2">
     @{ foreach (var room in Model.allRooms)
         {
