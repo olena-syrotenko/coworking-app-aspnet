@@ -5,12 +5,19 @@
     {
         @foreach (var el in Model.rentCart.rentCartItems)
         {
-            <div class="alert-warning mt-3">
+        <div class="d-flex">
+            <div class="alert-warning mt-3 w-70">
                 <b>Робоче місце:</b> @el.place.code<br />
                 <b>Кімната:</b> @el.place.room.roomType.name @el.place.room.name<br />
                 <b>Сума орендної плати:</b> @el.price.ToString("c")<br />
                 <b>Період оренди:</b> @el.rentStart.ToString("dd/MM/yyyy") -  @el.rentEnd.ToString("dd/MM/yyyy")
             </div>
+            <div class="d-flex justify-content-center align-items-center ps-5">
+                <form method="post" asp-controller="RentCart" asp-action="RemoveFromCart" asp-route-id="@el.id">
+                    <button type="submit" class="btn btn-outline-orange">Видалити</button>
+                </form>
+            </div>
+        </div>
         }
         <hr />
         <b>Загальна сума орендної плати:</b> @Model.totalPrice.ToString("c")<br />

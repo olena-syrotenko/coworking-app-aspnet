@@ -62,6 +62,13 @@ namespace CoworkingApp.Data.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public IActionResult RemoveFromCart(int id)
+        {
+            _rentCart.RemoveFromCart(id);
+            return RedirectToAction("Index");
+        }
+
         private bool validateDateRange(DateTime start, DateTime end)
         {
             return start >= DateTime.Today && start <= end;

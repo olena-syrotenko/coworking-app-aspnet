@@ -42,6 +42,12 @@ namespace CoworkingApp.Data.Models
 			appDbContent.SaveChanges();
 		}
 
+		public void RemoveFromCart(int id)
+        {
+			appDbContent.RentCartItem.Remove(appDbContent.RentCartItem.Find(id));
+			appDbContent.SaveChanges();
+        }
+
 		public List<RentCartItem> getRentItems()
 		{
 			return appDbContent.RentCartItem.Where(p => p.rentCartId == RentCartId)
